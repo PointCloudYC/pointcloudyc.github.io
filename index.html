@@ -22,13 +22,19 @@
   // Photo gallery switcher
   var _gphotos = ['static/img/chaoyin2.png', 'static/img/family2.png'];
   var _gidx = 0;
+  // Preload all photos so switching is instant
+  window.addEventListener('load', function () {
+    _gphotos.forEach(function (src) { (new Image()).src = src; });
+  });
   function switchPhoto(idx) {
+    if (idx === _gidx) return;
     var img = document.getElementById('gphoto');
     img.style.opacity = '0';
     setTimeout(function () {
+      img.onload = function () { img.style.opacity = '1'; img.onload = null; };
       img.src = _gphotos[idx];
-      img.style.opacity = '1';
-    }, 200);
+      if (img.complete) { img.style.opacity = '1'; } // already cached
+    }, 220);
     document.querySelectorAll('.gdot').forEach(function (d, i) {
       d.classList.toggle('active', i === idx);
     });
