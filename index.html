@@ -19,6 +19,22 @@
   function paper_stop(id) {
     document.getElementById(id).style.opacity = "0";
   }
+  // Photo gallery switcher
+  var _gphotos = ['static/img/chaoyin2.png', 'static/img/family2.png'];
+  var _gidx = 0;
+  function switchPhoto(idx) {
+    var img = document.getElementById('gphoto');
+    img.style.opacity = '0';
+    setTimeout(function () {
+      img.src = _gphotos[idx];
+      img.style.opacity = '1';
+    }, 200);
+    document.querySelectorAll('.gdot').forEach(function (d, i) {
+      d.classList.toggle('active', i === idx);
+    });
+    _gidx = idx;
+  }
+
   // BibTeX show/hide + copy-to-clipboard
   function toggleBib(id) {
     var e = document.getElementById(id);
@@ -83,9 +99,14 @@
             </p>
           </td>
           <td width="33%" valign="middle" class="photo-cell" style="text-align: center;">
-            <div class="photo-swap" title="Hover to see the casual me">
-              <img class="profile-photo formal" src="static/img/chaoyin.png" alt="Profile photo of Chao YIN">
-              <img class="profile-photo casual" src="static/img/family.png" alt="Casual photo of Chao YIN">
+            <div class="photo-gallery">
+              <div class="photo-frame">
+                <img class="gallery-photo" id="gphoto" src="static/img/chaoyin2.png" alt="Profile photo of Chao YIN">
+              </div>
+              <div class="gallery-dots">
+                <span class="gdot active" onclick="switchPhoto(0)" title="Portrait"></span>
+                <span class="gdot" onclick="switchPhoto(1)" title="Family"></span>
+              </div>
             </div>
           </td>
         </tr>
