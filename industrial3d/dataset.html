@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dataset — Industrial3D</title>
+  <meta name="description" content="Industrial3D dataset details: 12 semantic classes, 13 areas from 7 water treatment facilities, 612.7M labeled points, scene gallery, and download instructions.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/nav.js" defer></script>
+  <script src="js/media.js" defer></script>
+</head>
+<body>
+
+<!-- ── Navigation ─────────────────────────────────────────── -->
+<header class="site-header">
+  <nav class="nav-container">
+    <div class="nav-brand">
+      <a href="index.html" class="brand-link">
+        <span class="brand-icon">⬡</span>
+        <span class="brand-name">Industrial3D</span>
+      </a>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html"      class="nav-link" data-page="index.html">Home</a></li>
+      <li><a href="dataset.html"    class="nav-link" data-page="dataset.html">Dataset</a></li>
+      <li><a href="benchmark.html"  class="nav-link" data-page="benchmark.html">Benchmark</a></li>
+      <li><a href="submit.html"     class="nav-link" data-page="submit.html">Submit</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon-dark">☽</span>
+        <span class="theme-icon-light">☀</span>
+      </button>
+      <a href="https://github.com/PointCloudYC/Industrial3D" class="btn-github" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        <span>GitHub</span>
+      </a>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- ── Page Hero ────────────────────────────────────────────── -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <span class="section-label">Dataset</span>
+    <h1 class="page-title">Industrial3D Dataset</h1>
+    <p class="page-desc">
+      612.7 million expert-labeled points from 20 room scenes, 13 areas, and 7 operational water treatment facilities — the largest publicly available industrial MEP dataset.
+    </p>
+  </div>
+</div>
+
+<!-- ── Class Taxonomy ────────────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <span class="section-label">Semantic Classes</span>
+    <h2 class="section-title">12-Class MEP Taxonomy</h2>
+    <p class="section-subtitle">Classes organized by frequency tier. Tier 1 dominates 77% of labeled points; Tier 3 spans 7 classes totaling only 3%.</p>
+
+    <!-- Tier 1 -->
+    <div class="tier-group tier-1">
+      <div class="tier-header">
+        <span class="tier-badge">Tier 1 — Head</span>
+        <span class="tier-pct">≈ 77% of all points</span>
+      </div>
+      <div class="classes-grid">
+        <div class="class-card">
+          <span class="class-dot" style="background:#4fc3f7"></span>
+          <div class="class-info">
+            <div class="class-name">Pipe <span class="class-abbr">/ Pip</span></div>
+            <div class="class-desc">Cylindrical conduits for fluid transport across all diameters.</div>
+          </div>
+        </div>
+        <div class="class-card">
+          <span class="class-dot" style="background:#a5d6a7"></span>
+          <div class="class-info">
+            <div class="class-name">Rectangular Beam <span class="class-abbr">/ RBeam</span></div>
+            <div class="class-desc">Rectangular structural steel support members and cable trays.</div>
+          </div>
+        </div>
+        <div class="class-card">
+          <span class="class-dot" style="background:#ef9a9a"></span>
+          <div class="class-info">
+            <div class="class-name">Duct <span class="class-abbr">/ Dct</span></div>
+            <div class="class-desc">Rectangular air-handling conduits for HVAC and ventilation.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tier 2 -->
+    <div class="tier-group tier-2">
+      <div class="tier-header">
+        <span class="tier-badge">Tier 2 — Common</span>
+        <span class="tier-pct">≈ 20% of all points</span>
+      </div>
+      <div class="classes-grid">
+        <div class="class-card">
+          <span class="class-dot" style="background:#fff59d"></span>
+          <div class="class-info">
+            <div class="class-name">I-Beam <span class="class-abbr">/ IBeam</span></div>
+            <div class="class-desc">I-shaped structural steel beams for primary structural support.</div>
+          </div>
+        </div>
+        <div class="class-card">
+          <span class="class-dot" style="background:#ce93d8"></span>
+          <div class="class-info">
+            <div class="class-name">Tank <span class="class-abbr">/ Tnk</span></div>
+            <div class="class-desc">Large cylindrical or rectangular water/chemical storage vessels.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tier 3 -->
+    <div class="tier-group tier-3">
+      <div class="tier-header">
+        <span class="tier-badge">Tier 3 — Tail</span>
+        <span class="tier-pct">≈ 3% of all points · 7 classes · 215:1 imbalance vs. RBeam</span>
+      </div>
+      <div class="classes-grid">
+        <div class="class-card">
+          <span class="class-dot" style="background:#ffcc80"></span>
+          <div class="class-info">
+            <div class="class-name">Flange <span class="class-abbr">/ Flg</span></div>
+            <div class="class-desc">Circular disc connectors joining pipe sections at bolted joints.</div>
+          </div>
+        </div>
+        <div class="class-card">
+          <span class="class-dot" style="background:#80deea"></span>
+          <div class="class-info">
+            <div class="class-name">Valve <span class="class-abbr">/ Val</span></div>
+            <div class="class-desc">Flow-control devices (gate, ball, butterfly) on pipelines.</div>
+          </div>
+        </div>
+        <div class="class-card">
+          <span class="class-dot" style="background:#f48fb1"></span>
+          <div class="class-info">
+            <div class="class-name">Pump <span class="class-abbr">/ Pmp</span></div>
+            <div class="class-desc">Mechanical devices for moving fluid through the system.</div>
+          </div>
+        </div>
+        <div class="class-card">
+          <span class="class-dot" style="background:#b39ddb"></span>
+          <div class="class-info">
+            <div class="class-name">Strainer <span class="class-abbr">/ Str</span></div>
+            <div class="class-desc">In-line filtration devices preventing debris from entering equipment.</div>
+          </div>
+        </div>
+        <div class="class-card">
+          <span class="class-dot" style="background:#90caf9"></span>
+          <div class="class-info">
+            <div class="class-name">Elbow <span class="class-abbr">/ Elb</span></div>
+            <div class="class-desc">45° and 90° curved pipe connectors for directional changes.</div>
+          </div>
+        </div>
+        <div class="class-card">
+          <span class="class-dot" style="background:#a5d6a7"></span>
+          <div class="class-info">
+            <div class="class-name">Tee <span class="class-abbr">/ Tee</span></div>
+            <div class="class-desc">T-shaped junctions splitting or combining pipe flows.</div>
+          </div>
+        </div>
+        <div class="class-card">
+          <span class="class-dot" style="background:#ffab91"></span>
+          <div class="class-info">
+            <div class="class-name">Reducer <span class="class-abbr">/ Rdr</span></div>
+            <div class="class-desc">Concentric or eccentric fittings for pipe diameter transitions.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Class example image -->
+    <div class="figure-block" style="margin-top:2rem" data-zoom="image"
+         data-full="assets/overview.png"
+         data-caption="All 12 semantic classes illustrated with representative point cloud examples at 6 mm TLS resolution.">
+      <img
+        src="assets/overview.png"
+        alt="All 12 semantic classes illustrated with point cloud examples"
+        loading="lazy"
+        width="720"
+        height="537"
+      >
+      <span class="zoom-hint">⤢ Click to enlarge</span>
+      <p class="figure-caption">All 12 semantic classes illustrated with representative point cloud examples at 6 mm TLS resolution.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Statistics ────────────────────────────────────────────── -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <span class="section-label">Statistics</span>
+    <h2 class="section-title">Distribution &amp; Scale</h2>
+    <p class="section-subtitle">Long-tail class distribution with a 215:1 head-to-tail ratio — 3.5× more severe than S3DIS.</p>
+
+    <div class="grid-2" style="align-items:start">
+      <div class="figure-block" data-zoom="image"
+           data-full="assets/class_distribution_tiers.png"
+           data-caption="Long-tail distribution of 612.7M labeled points across 3 tiers. The 215:1 head:tail ratio drives the dual crisis. <a href='assets/class_distribution_tiers.png' target='_blank' rel='noopener'>Open full resolution ↗</a>">
+        <picture>
+          <source srcset="assets/class_distribution_tiers.webp" type="image/webp">
+          <img
+            src="assets/class_distribution_tiers.png"
+            alt="Class distribution across 3 tiers showing 215:1 imbalance"
+            loading="lazy"
+            width="1400"
+            height="938"
+          >
+        </picture>
+        <span class="zoom-hint">⤢ Click to enlarge</span>
+        <p class="figure-caption">Long-tail distribution of 612.7M labeled points across 3 tiers. The 215:1 head:tail ratio drives the dual crisis.</p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:1rem">
+        <div class="card">
+          <div class="font-mono" style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem">Dataset At a Glance</div>
+          <table style="width:100%;font-size:0.875rem;border-collapse:collapse">
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border-faint)">
+                <td style="padding:0.5rem 0;color:var(--text-muted)">Total labeled points</td>
+                <td style="padding:0.5rem 0;text-align:right;font-family:JetBrains Mono,monospace;color:var(--accent)">612.7 M</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border-faint)">
+                <td style="padding:0.5rem 0;color:var(--text-muted)">Raw scan points</td>
+                <td style="padding:0.5rem 0;text-align:right;font-family:JetBrains Mono,monospace">2.3+ B</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border-faint)">
+                <td style="padding:0.5rem 0;color:var(--text-muted)">TLS resolution</td>
+                <td style="padding:0.5rem 0;text-align:right;font-family:JetBrains Mono,monospace">6 mm @ 10 m</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border-faint)">
+                <td style="padding:0.5rem 0;color:var(--text-muted)">Ranging accuracy</td>
+                <td style="padding:0.5rem 0;text-align:right;font-family:JetBrains Mono,monospace">4 mm @ 10 m</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border-faint)">
+                <td style="padding:0.5rem 0;color:var(--text-muted)">Point attributes</td>
+                <td style="padding:0.5rem 0;text-align:right;font-family:JetBrains Mono,monospace">XYZ + RGB + I</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border-faint)">
+                <td style="padding:0.5rem 0;color:var(--text-muted)">Annotation effort</td>
+                <td style="padding:0.5rem 0;text-align:right;font-family:JetBrains Mono,monospace">754 person-hours</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border-faint)">
+                <td style="padding:0.5rem 0;color:var(--text-muted)">Class imbalance ratio</td>
+                <td style="padding:0.5rem 0;text-align:right;font-family:JetBrains Mono,monospace;color:var(--danger)">215 : 1</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0;color:var(--text-muted)">Scale vs. closest MEP</td>
+                <td style="padding:0.5rem 0;text-align:right;font-family:JetBrains Mono,monospace;color:var(--accent)">6.6× larger</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="font-mono" style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem">Acquisition</div>
+          <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.7">
+            Captured using a <strong style="color:var(--text-primary)">Leica BLK360</strong> terrestrial laser scanner in operational water treatment facilities in Hong Kong. Each room was scanned from multiple stations (2–8 per room) to minimise occlusion. Raw scans were registered using Leica Cyclone, then merged and manually annotated in CloudCompare.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Scene Gallery & Videos ─────────────────────────────── -->
+<section class="section" style="padding-top:0" id="scenes">
+  <div class="container">
+    <span class="section-label">Scene Gallery</span>
+    <h2 class="section-title">Representative Scenes</h2>
+    <p class="section-subtitle">20 unique rooms across 13 areas. 4 representative scenes shown with ground-truth annotations. Click any image or video to view it full-screen.</p>
+
+    <div class="figure-block" style="margin-bottom:1.5rem" data-zoom="image"
+         data-full="assets/scene_gallery_v1.png"
+         data-caption="Scene gallery: 4 representative rooms showing annotated point clouds from training and test areas. <a href='assets/scene_gallery_v1.png' target='_blank' rel='noopener'>Open full resolution ↗</a>">
+      <picture>
+        <source srcset="assets/scene_gallery_v1.webp" type="image/webp">
+        <img
+          src="assets/scene_gallery_v1.png"
+          alt="Scene gallery: 4 representative Industrial3D scenes"
+          loading="lazy"
+          width="2000"
+          height="658"
+        >
+      </picture>
+      <span class="zoom-hint">⤢ Click to enlarge</span>
+      <p class="figure-caption">Scene gallery: 4 representative rooms showing annotated point clouds from training and test areas.</p>
+    </div>
+
+    <div class="video-grid">
+
+      <div class="video-card">
+        <div class="video-wrapper" data-zoom="video"
+             data-caption="Area 2 — Service Gallery (train). Largest scene at 79.6M points with the highest MEP density.">
+          <span class="video-tag train">TRAIN</span>
+          <video data-lazy muted loop playsinline preload="none"
+                 poster="assets/posters/Area_2_service_gallery_gt.webp">
+            <source data-src="../videos/Area_2_service_gallery_gt.mp4" type="video/mp4">
+          </video>
+          <span class="zoom-hint">⤢ Enlarge</span>
+        </div>
+        <div class="video-meta">
+          <div class="video-title">Area 2 — Service Gallery</div>
+          <div class="video-desc">Largest scene at 79.6M points. Highest MEP density with dense pipe networks, cable trays, and structural steelwork.</div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrapper" data-zoom="video"
+             data-caption="Area 12 — SPH Pump Room (test). Compact equipment room with pump arrays, valves, and dense pipe connections.">
+          <span class="video-tag test">TEST</span>
+          <video data-lazy muted loop playsinline preload="none"
+                 poster="assets/posters/Area_12_SPHRoom_1_gt.webp">
+            <source data-src="../videos/Area_12_SPHRoom_1_gt.mp4" type="video/mp4">
+          </video>
+          <span class="zoom-hint">⤢ Enlarge</span>
+        </div>
+        <div class="video-meta">
+          <div class="video-title">Area 12 — SPH Pump Room</div>
+          <div class="video-desc">Primary test scene. Compact equipment room with pump arrays, valves, and dense pipe connections — representative of test-set difficulty.</div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrapper" data-zoom="video"
+             data-caption="Area 6-1 — 93m PSU Room (test). Large pump sets and parallel pipe runs.">
+          <span class="video-tag test">TEST</span>
+          <video data-lazy muted loop playsinline preload="none"
+                 poster="assets/posters/Area_6_OGB_93m_Psu_Rm_gt.webp">
+            <source data-src="../videos/Area_6_OGB_93m_Psu_Rm_gt.mp4" type="video/mp4">
+          </video>
+          <span class="zoom-hint">⤢ Enlarge</span>
+        </div>
+        <div class="video-meta">
+          <div class="video-title">Area 6-1 — 93m Psu Room</div>
+          <div class="video-desc">Moderate complexity with large pump sets and parallel pipe runs. Test set area with both head and tail class instances.</div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrapper" data-zoom="video"
+             data-caption="Area 3 — 93m Tank Area (train). Facility-scale tanks, pipe bundles, and structural steelwork.">
+          <span class="video-tag train">TRAIN</span>
+          <video data-lazy muted loop playsinline preload="none"
+                 poster="assets/posters/Area_3_OGB_93m_Tank_Area_1_gt.webp">
+            <source data-src="../videos/Area_3_OGB_93m_Tank_Area_1_gt.mp4" type="video/mp4">
+          </video>
+          <span class="zoom-hint">⤢ Enlarge</span>
+        </div>
+        <div class="video-meta">
+          <div class="video-title">Area 3 — 93m Tank Area</div>
+          <div class="video-desc">Large-scale tank structure showing geometric diversity between tanks, pipe bundles, and structural steelwork at facility scale.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="figure-block" style="margin-top:1.5rem" data-zoom="image"
+         data-full="assets/scene_gallery_more_v1.png"
+         data-caption="Additional scenes showing the diversity of industrial environments across the 13 areas. <a href='assets/scene_gallery_more_v1.png' target='_blank' rel='noopener'>Open full resolution ↗</a>">
+      <picture>
+        <source srcset="assets/scene_gallery_more_v1.webp" type="image/webp">
+        <img
+          src="assets/scene_gallery_more_v1.png"
+          alt="Additional Industrial3D scenes"
+          loading="lazy"
+          width="1800"
+          height="1599"
+        >
+      </picture>
+      <span class="zoom-hint">⤢ Click to enlarge</span>
+      <p class="figure-caption">Additional scenes from the dataset showing the diversity of industrial environments across the 13 areas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Data Splits ────────────────────────────────────────────── -->
+<section class="section" style="padding-top:0" id="splits">
+  <div class="container">
+    <span class="section-label">Data Splits</span>
+    <h2 class="section-title">Train / Validation / Test Protocol</h2>
+    <p class="section-subtitle">Area-based splits following S3DIS convention to prevent data leakage between rooms of the same facility.</p>
+
+    <div class="split-table-wrapper">
+      <table class="split-table">
+        <thead>
+          <tr>
+            <th>Split</th>
+            <th>Areas</th>
+            <th>Points</th>
+            <th>% Total</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="split-label split-train">Train</span></td>
+            <td class="mono">1, 2, 3, 4, 5, 7, 8, 10, 11, 13 <em style="color:var(--text-muted)">(10 areas)</em></td>
+            <td class="mono">527.8 M</td>
+            <td class="mono">86.1%</td>
+            <td>Primary training set. Includes the largest area (Area 2, 79.6M pts).</td>
+          </tr>
+          <tr>
+            <td><span class="split-label split-val">Val</span></td>
+            <td class="mono">9 (OSCG) <em style="color:var(--text-muted)">(1 area)</em></td>
+            <td class="mono">15.1 M</td>
+            <td class="mono">2.5%</td>
+            <td>Validation area used for hyperparameter tuning.</td>
+          </tr>
+          <tr>
+            <td><span class="split-label split-test">Test</span></td>
+            <td class="mono">6 (93m Psu/VSPA-1) + 12 (SPH) <em style="color:var(--text-muted)">(2 areas)</em></td>
+            <td class="mono">84.9 M</td>
+            <td class="mono">13.9%</td>
+            <td>Held-out test set. Evaluated via vote-based smooth testing (test_smooth = 0.95).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="margin-top:1.25rem;max-width:680px">
+      <h4 style="margin-bottom:0.5rem">Evaluation Metric</h4>
+      <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.7">
+        Mean Intersection over Union (mIoU) across all 12 classes. Vote-based evaluation with test_smooth = 0.95 is the standard protocol. Per-class IoU is reported for all 12 classes to expose failure modes on tail classes (Reducer, Strainer, Pump, etc.).
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Download ────────────────────────────────────────────── -->
+<section class="section" style="padding-top:0;padding-bottom:5rem" id="download">
+  <div class="container">
+    <span class="section-label">Download</span>
+    <h2 class="section-title">Access the Dataset</h2>
+
+    <div class="status-banner" style="max-width:680px">
+      <span class="status-banner-icon">⚠</span>
+      <span>
+        <strong>Under Review.</strong> Full dataset (points, labels, splits) and benchmark code will be released upon journal paper acceptance.
+        Preview materials (videos, figures) are available now via GitHub and Google Drive.
+      </span>
+    </div>
+
+    <div class="download-grid">
+      <div class="download-card">
+        <div class="download-icon">📄</div>
+        <div class="download-title">Paper (arXiv)</div>
+        <div class="download-desc">Read the full paper including dataset construction protocol, annotation methodology, benchmark results, and analysis.</div>
+        <a href="https://arxiv.org/abs/2603.28660" class="btn btn-primary btn-sm" target="_blank" rel="noopener">arXiv:2603.28660 →</a>
+      </div>
+
+      <div class="download-card">
+        <div class="download-icon">⎘</div>
+        <div class="download-title">GitHub Repository</div>
+        <div class="download-desc">Benchmark code, PyTorch implementations, training configs, and evaluation scripts. Pre-trained models released upon acceptance.</div>
+        <a href="https://github.com/PointCloudYC/Industrial3D" class="btn btn-outline btn-sm" target="_blank" rel="noopener">github.com/PointCloudYC/Industrial3D →</a>
+      </div>
+
+      <div class="download-card">
+        <div class="download-icon">🗂</div>
+        <div class="download-title">Preview Materials</div>
+        <div class="download-desc">RGB + ground-truth videos and renders for 4 representative rooms. Available on Google Drive now.</div>
+        <a href="https://drive.google.com/drive/folders/1T6viLM-SKrDZBCaoKghgld2pIyRq6XLZ" class="btn btn-outline btn-sm" target="_blank" rel="noopener">Google Drive →</a>
+      </div>
+
+      <div class="download-card">
+        <div class="download-icon">📦</div>
+        <div class="download-title">Full Dataset</div>
+        <div class="download-desc">20 room scenes, 612.7M labeled points in .txt + .ply format (XYZRGB + class labels). Released upon journal acceptance.</div>
+        <span class="btn btn-outline btn-sm" style="opacity:0.5;cursor:not-allowed">Coming Soon</span>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:2rem;max-width:680px">
+      <h4 style="margin-bottom:0.75rem">Data Formats</h4>
+      <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.7;margin-bottom:0.75rem">
+        The dataset will be provided in two formats:
+      </p>
+      <ul style="font-size:0.875rem;color:var(--text-secondary);list-style:disc;padding-left:1.25rem;line-height:1.9">
+        <li><code>.txt</code> — space-delimited: <code>X Y Z R G B label</code> per point</li>
+        <li><code>.ply</code> — binary PLY with vertex attributes: <code>x y z red green blue label</code></li>
+      </ul>
+      <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.7;margin-top:0.75rem">
+        Labels are integer class IDs (0–11) matching the order: Duct, Elbow, Flange, IBeam, Pipe, Pump, RBeam, Reducer, Strainer, Tank, Tee, Valve.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="brand-link" style="margin-bottom:0.75rem">
+          <span class="brand-icon">⬡</span>
+          <span class="brand-name">Industrial3D</span>
+        </a>
+        <p class="footer-desc">
+          The largest publicly available industrial MEP point cloud dataset and cross-paradigm benchmark, from 7 water treatment facilities in Hong Kong.
+        </p>
+      </div>
+      <div>
+        <p class="footer-col-title">Pages</p>
+        <ul class="footer-links">
+          <li><a href="index.html"     class="footer-link">Home</a></li>
+          <li><a href="dataset.html"   class="footer-link">Dataset &amp; Download</a></li>
+          <li><a href="benchmark.html" class="footer-link">Benchmark</a></li>
+          <li><a href="submit.html"    class="footer-link">Submit Results</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Links</p>
+        <ul class="footer-links">
+          <li><a href="https://arxiv.org/abs/2603.28660" class="footer-link" target="_blank" rel="noopener">Paper (arXiv)</a></li>
+          <li><a href="https://github.com/PointCloudYC/Industrial3D" class="footer-link" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://drive.google.com/drive/folders/1T6viLM-SKrDZBCaoKghgld2pIyRq6XLZ" class="footer-link" target="_blank" rel="noopener">Google Drive</a></li>
+          <li><a href="submit.html#cite" class="footer-link">Cite</a></li>
+          <li><a href="https://chaoyin.me" class="footer-link">← Author Homepage</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Industrial3D Authors. Dataset under review — preview materials available.</p>
+      <span class="footer-badge">GPL v3</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

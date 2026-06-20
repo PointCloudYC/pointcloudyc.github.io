@@ -1,0 +1,573 @@
+/* stylesheet.css — Academic website for Dr. Chao YIN */
+/* Style modeled after jonbarron.github.io */
+
+body {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  background-color: #ffffff;
+  color: #000000;
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  font-size: 14px;
+}
+
+a:link {
+  color: #1772d0;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #1772d0;
+  text-decoration: none;
+}
+
+a:active {
+  color: #f09228;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #f09228;
+  text-decoration: none;
+}
+
+/* Name header */
+.name {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* Paper title */
+.papertitle {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Section headings */
+h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333333;
+  border-bottom: 1px solid #cccccc;
+  padding-bottom: 4px;
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+h3 {
+  font-size: 15px;
+  font-weight: bold;
+  color: #444444;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+
+/* Paper thumbnail hover — scale-up animation */
+.one {
+  width: 160px;
+  height: 120px;
+  position: relative;
+  overflow: visible;
+  z-index: 1;
+}
+.one:hover {
+  z-index: 10;
+}
+.two {
+  display: none; /* overlay disabled; scale animation used instead */
+}
+
+/* Publication thumbnail image */
+
+/* News list */
+.news-item {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.news-date {
+  font-weight: bold;
+  color: #555555;
+}
+
+/* Link bar */
+.links {
+  margin-top: 12px;
+  font-size: 13px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 14px;
+}
+
+.links a,
+.links .wechat {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+/* Inline icon (contact bar + publication links) */
+.ico {
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+}
+
+/* WeChat: custom tooltip on hover showing WeChat ID */
+.links .wechat {
+  color: #1772d0;
+  cursor: default;
+  position: relative;
+}
+.links .wechat::after {
+  content: "WeChat ID: ychaoonline";
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 4px 9px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.links .wechat:hover::after {
+  opacity: 1;
+}
+
+/* Publication highlight note */
+.pub-highlight {
+  background: #ffffd0;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-weight: normal;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: #999999;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+/* Award highlight */
+.award-highlight {
+  color: #cc0000;
+  font-weight: bold;
+}
+
+/* Citation style */
+.citation-title {
+  font-weight: bold;
+}
+
+.citation-venue {
+  font-style: italic;
+}
+
+/* Mobile responsive */
+@media screen and (max-width: 820px) {
+  body {
+    font-size: 16px;
+  }
+
+  table {
+    font-size: 16px;
+  }
+
+  .name {
+    font-size: 28px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+}
+
+/* Profile photo with hover swap (formal -> casual) */
+.photo-swap {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+}
+
+.profile-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.photo-swap .profile-photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.4s ease;
+}
+
+.photo-swap .casual {
+  opacity: 0;
+}
+
+.photo-swap:hover .casual {
+  opacity: 1;
+}
+
+.photo-swap:hover .formal {
+  opacity: 0;
+}
+
+@media screen and (max-width: 820px) {
+  .photo-swap,
+  .profile-photo {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+/* Publication thumbnail image */
+.paper-thumb {
+  width: 160px;
+  height: 120px;
+  object-fit: cover;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-origin: center center;
+  display: block;
+}
+.one:hover .paper-thumb {
+  transform: scale(1.3);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.28);
+}
+
+/* Venue label styling */
+.venue-label {
+  font-size: 12px;
+  background-color: #f0f0f0;
+  padding: 1px 6px;
+  border-radius: 3px;
+  margin-left: 4px;
+  color: #666666;
+}
+
+/* Publication heading note + Google Scholar note */
+.h3-note {
+  font-size: 12px;
+  font-weight: normal;
+  color: #888888;
+}
+
+.pub-note {
+  font-size: 13px;
+  color: #555555;
+  margin: 0 0 8px 0;
+}
+
+/* Publication link row (DOI / Code / BibTeX) */
+.pub-links {
+  margin: 4px 0;
+  font-size: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+}
+
+.pub-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+/* GitHub star count badge */
+.stars {
+  font-size: 11px;
+  color: #b8860b;
+  margin-left: -6px;
+}
+
+/* BibTeX box (hidden until toggled) */
+.bibtex-box {
+  display: none;
+  position: relative;
+  margin: 4px 0 8px 0;
+  background-color: #f7f7f7;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+}
+
+.bibtex-box pre {
+  margin: 0;
+  padding: 10px 12px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #333333;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.bib-copy {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 11px;
+  padding: 2px 8px;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  color: #1772d0;
+  cursor: pointer;
+}
+
+.bib-copy:hover {
+  background-color: #1772d0;
+  color: #ffffff;
+}
+
+/* ===== Top navigation menu (Home / About / Blog / Industrial3D) ===== */
+.topnav {
+  text-align: center;
+  margin: 4px 0 8px 0;
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.topnav a {
+  display: inline-block;
+  margin: 2px 8px;
+  padding: 4px 6px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #1772d0;
+}
+
+.topnav a:hover {
+  color: #f09228;
+}
+
+.topnav a.active {
+  color: #333333;
+  border-bottom: 2px solid #f09228;
+}
+
+/* ===== Blog ===== */
+.nav-top {
+  font-size: 13px;
+  margin: 14px 0 0 0;
+}
+
+.post-list {
+  padding-left: 20px;
+}
+
+.post-list .news-item {
+  margin-bottom: 14px;
+}
+
+.post-excerpt {
+  font-size: 13px;
+  color: #555555;
+  margin-top: 2px;
+}
+
+.post {
+  margin-top: 16px;
+  line-height: 1.6;
+}
+
+.post-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.post-meta {
+  font-size: 13px;
+  color: #888888;
+  margin-top: 0;
+  margin-bottom: 18px;
+}
+
+/* ===== Industrial3D project pages ===== */
+.subnav {
+  text-align: center;
+  border-bottom: 1px solid #cccccc;
+  padding-bottom: 8px;
+  margin-bottom: 6px;
+}
+
+.subnav a {
+  margin: 0 10px;
+  font-size: 14px;
+}
+
+.subnav a.active {
+  font-weight: bold;
+  color: #f09228;
+}
+
+.hero-sub {
+  text-align: center;
+  font-size: 15px;
+  color: #555555;
+  margin-top: -4px;
+}
+
+.btn-row {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid #1772d0;
+  border-radius: 5px;
+  font-size: 13px;
+}
+
+.btn:hover {
+  background-color: #1772d0;
+  color: #ffffff;
+}
+
+.btn:hover .ico {
+  filter: brightness(0) invert(1);
+}
+
+.stat-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.stat {
+  flex: 1 1 140px;
+  min-width: 120px;
+  text-align: center;
+  background-color: #f7f7f7;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  padding: 12px 8px;
+}
+
+.stat .num {
+  font-size: 26px;
+  font-weight: bold;
+  color: #1772d0;
+}
+
+.stat .label {
+  font-size: 12px;
+  color: #666666;
+  margin-top: 2px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 10px 0;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #dddddd;
+  padding: 6px 10px;
+  text-align: left;
+}
+
+.data-table th {
+  background-color: #f0f0f0;
+}
+
+/* ===================================================================
+   RESPONSIVE LAYOUT (mobile + tablet)
+   The site uses fixed-width table layouts (Jon Barron style). These
+   rules make the 820px container fluid and let the header + paper
+   rows stack vertically on narrow screens.
+   =================================================================== */
+
+/* The fixed-width outer container becomes fluid below 820px */
+table[width="820"] {
+  width: 100%;
+  max-width: 820px;
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Tablet and below: add side gutters so content is not flush to edges */
+@media screen and (max-width: 820px) {
+  body {
+    padding: 0 14px;
+  }
+}
+
+/* Phones and small tablets: stack the header and paper rows */
+@media screen and (max-width: 768px) {
+
+  /* Header row: photo on top, name/bio below */
+  table[cellpadding="12"] tr {
+    display: flex;
+    flex-direction: column;
+  }
+  table[cellpadding="12"] td {
+    display: block;
+    width: 100% !important;
+  }
+  table[cellpadding="12"] td.photo-cell {
+    order: -1;
+    margin-bottom: 10px;
+  }
+
+  /* Publication rows: thumbnail centered on top, text below */
+  table[cellpadding="8"] td {
+    display: block;
+    width: 100% !important;
+  }
+  table[cellpadding="8"] td[width="20%"] {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  table[cellpadding="8"] .one,
+  table[cellpadding="8"] .two {
+    margin: 0 auto;
+  }
+
+  /* Industrial3D data tables: allow horizontal scroll instead of overflow */
+  .data-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

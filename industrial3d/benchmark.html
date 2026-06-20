@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benchmark — Industrial3D</title>
+  <meta name="description" content="Industrial3D cross-paradigm benchmark leaderboard: 9 methods across fully-supervised, weakly-supervised, unsupervised, and foundation-model settings. Sortable results.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/nav.js" defer></script>
+  <script src="js/leaderboard.js" defer></script>
+</head>
+<body>
+
+<!-- ── Navigation ─────────────────────────────────────────── -->
+<header class="site-header">
+  <nav class="nav-container">
+    <div class="nav-brand">
+      <a href="index.html" class="brand-link">
+        <span class="brand-icon">⬡</span>
+        <span class="brand-name">Industrial3D</span>
+      </a>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html"      class="nav-link" data-page="index.html">Home</a></li>
+      <li><a href="dataset.html"    class="nav-link" data-page="dataset.html">Dataset</a></li>
+      <li><a href="benchmark.html"  class="nav-link" data-page="benchmark.html">Benchmark</a></li>
+      <li><a href="submit.html"     class="nav-link" data-page="submit.html">Submit</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon-dark">☽</span>
+        <span class="theme-icon-light">☀</span>
+      </button>
+      <a href="https://github.com/PointCloudYC/Industrial3D" class="btn-github" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        <span>GitHub</span>
+      </a>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- ── Page Hero ─────────────────────────────────────────────── -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <span class="section-label">Benchmark</span>
+    <h1 class="page-title">Cross-Paradigm Leaderboard</h1>
+    <p class="page-desc">
+      9 methods evaluated across 4 learning paradigms on the Industrial3D test set (Areas 6 + 12, 84.9M points). Metric: mean IoU (mIoU) over 12 classes via vote-based evaluation.
+    </p>
+  </div>
+</div>
+
+<!-- ── Evaluation Protocol ───────────────────────────────────── -->
+<section class="section--tight">
+  <div class="container">
+    <div class="protocol-grid">
+      <div class="protocol-item">
+        <div class="protocol-key">Test Set</div>
+        <div class="protocol-value">Areas 6 + 12</div>
+        <div class="protocol-note">84.9M points, 2 areas from different facilities</div>
+      </div>
+      <div class="protocol-item">
+        <div class="protocol-key">Metric</div>
+        <div class="protocol-value">mIoU (12-class)</div>
+        <div class="protocol-note">Mean intersection over union across all classes</div>
+      </div>
+      <div class="protocol-item">
+        <div class="protocol-key">Evaluation</div>
+        <div class="protocol-value">Vote-Based</div>
+        <div class="protocol-note">test_smooth = 0.95, multi-pass inference</div>
+      </div>
+      <div class="protocol-item">
+        <div class="protocol-key">Split Protocol</div>
+        <div class="protocol-value">Area-Based</div>
+        <div class="protocol-note">S3DIS-style, no room-level leakage</div>
+      </div>
+      <div class="protocol-item">
+        <div class="protocol-key">Framework</div>
+        <div class="protocol-value">PyTorch</div>
+        <div class="protocol-note">Unified codebase for all methods; TF methods re-implemented</div>
+      </div>
+      <div class="protocol-item">
+        <div class="protocol-key">Val Set</div>
+        <div class="protocol-value">Area 9</div>
+        <div class="protocol-note">15.1M points, used for hyperparameter selection only</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" style="margin:0">
+
+<!-- ── Leaderboard ───────────────────────────────────────────── -->
+<section class="section">
+  <div class="container--wide">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem">
+      <div>
+        <span class="section-label">Results</span>
+        <h2 class="section-title" style="margin-bottom:0">All Methods</h2>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+        <span id="lbLastUpdated" style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text-muted)"></span>
+        <a href="submit.html" class="btn btn-primary btn-sm">+ Submit Result</a>
+      </div>
+    </div>
+
+    <!-- Filter controls -->
+    <div class="lb-controls">
+      <div class="lb-filters">
+        <button class="filter-btn active" data-filter="All">All Paradigms</button>
+        <button class="filter-btn" data-filter="Fully-Supervised">
+          <span class="paradigm-pill paradigm-full" style="pointer-events:none">Fully-Supervised</span>
+        </button>
+        <button class="filter-btn" data-filter="Weakly-Supervised">
+          <span class="paradigm-pill paradigm-weak" style="pointer-events:none">Weakly-Supervised</span>
+        </button>
+        <button class="filter-btn" data-filter="Unsupervised">
+          <span class="paradigm-pill paradigm-unsup" style="pointer-events:none">Unsupervised</span>
+        </button>
+        <button class="filter-btn" data-filter="Foundation Model">
+          <span class="paradigm-pill paradigm-found" style="pointer-events:none">Foundation Model</span>
+        </button>
+      </div>
+      <span class="lb-sort-info" id="sortInfo">sorted by miou ↓</span>
+    </div>
+
+    <!-- Main leaderboard table -->
+    <div class="lb-table-wrapper">
+      <table class="lb-table" aria-label="Industrial3D benchmark results">
+        <thead>
+          <tr>
+            <th style="width:40px;text-align:center">#</th>
+            <th data-sort="method">Method</th>
+            <th data-sort="paradigm">Paradigm</th>
+            <th data-sort="labels">Labels</th>
+            <th data-sort="miou" style="min-width:160px">mIoU (%)</th>
+            <th data-sort="oa">OA (%)</th>
+            <th data-sort="year">Year</th>
+            <th>Code / Status</th>
+          </tr>
+        </thead>
+        <tbody id="lbTbody">
+          <tr>
+            <td colspan="8" style="text-align:center;padding:3rem;color:var(--text-muted)">
+              Loading results…
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top:0.75rem;font-size:0.78rem;color:var(--text-muted)">
+      Click column headers to sort. Results verified by the Industrial3D team. OA = overall accuracy. — = not reported.
+    </p>
+  </div>
+</section>
+
+<!-- ── Per-class IoU ─────────────────────────────────────────── -->
+<section class="section" style="padding-top:0">
+  <div class="container--wide" id="perClassSection">
+    <span class="section-label">Per-Class Breakdown</span>
+    <h2 class="section-title">Per-Class IoU (12 Classes)</h2>
+    <p class="section-subtitle">
+      Vote-based per-class IoU for methods with full results available. Head classes dominate performance; tail classes (Reducer, Strainer, Pump, Elbow, Tee) remain near zero for most methods.
+    </p>
+
+    <div class="perclass-wrapper">
+      <table class="perclass-table" aria-label="Per-class IoU breakdown">
+        <thead id="pcThead"></thead>
+        <tbody id="pcTbody">
+          <tr><td colspan="14" style="text-align:center;padding:2rem;color:var(--text-muted)">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top:0.75rem;font-size:0.78rem;color:var(--text-muted)">
+      <span style="color:var(--accent)">Cyan</span> = best per class among listed methods.
+      <span style="color:var(--text-muted)">0.00</span> = zero IoU on that class.
+      Only vote-based (smooth test) results shown.
+    </p>
+  </div>
+</section>
+
+<!-- ── Gap Analysis ───────────────────────────────────────────── -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <span class="section-label">Key Finding</span>
+    <h2 class="section-title">The Domain Transfer Gap</h2>
+
+    <div class="gap-callout">
+      <div class="gap-number">39.95 pp</div>
+      <div class="gap-desc">
+        <p>
+          <strong>Best supervised method (Boundary-CB): 55.74% mIoU</strong><br>
+          <strong>Best zero-shot foundation model (Point-SAM One-vs-Rest): 15.79% mIoU</strong>
+        </p>
+        <p style="margin-top:0.75rem">
+          A <strong>39.95 percentage-point gap</strong> quantifies the unresolved industrial domain transfer challenge. Even the oracle Point-SAM (21.08%) — given GT mask proposals — trails the best supervised method by 34.66 pp. This gap arises from the dual crisis: foundation models trained on architectural/outdoor data are ill-equipped to distinguish geometrically ambiguous MEP fittings under extreme class imbalance.
+        </p>
+        <p style="margin-top:0.75rem;font-size:0.875rem;color:var(--text-muted)">
+          Remarkably, <strong>SQN with only 0.1% labels (44.29%)</strong> outperforms fully-supervised RandLA-Net (39.83%), suggesting that the inductive bias of sparse-label training may be better suited to this domain than dense supervision with vanilla architectures.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Call to Action ─────────────────────────────────────────── -->
+<section class="section--tight" style="background:var(--bg-surface);border-top:1px solid var(--border-faint);border-bottom:1px solid var(--border-faint)">
+  <div class="container" style="text-align:center">
+    <h3 style="margin-bottom:0.75rem">Have better results?</h3>
+    <p style="color:var(--text-secondary);margin:0 auto 1.5rem;max-width:48ch">
+      Submit your method's results to the leaderboard. We welcome results from all paradigms, including few-shot, semi-supervised, and multi-modal approaches.
+    </p>
+    <a href="submit.html" class="btn btn-primary">Submit Results →</a>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="brand-link" style="margin-bottom:0.75rem">
+          <span class="brand-icon">⬡</span>
+          <span class="brand-name">Industrial3D</span>
+        </a>
+        <p class="footer-desc">
+          The largest publicly available industrial MEP point cloud dataset and cross-paradigm benchmark, from 7 water treatment facilities in Hong Kong.
+        </p>
+      </div>
+      <div>
+        <p class="footer-col-title">Pages</p>
+        <ul class="footer-links">
+          <li><a href="index.html"     class="footer-link">Home</a></li>
+          <li><a href="dataset.html"   class="footer-link">Dataset &amp; Download</a></li>
+          <li><a href="benchmark.html" class="footer-link">Benchmark</a></li>
+          <li><a href="submit.html"    class="footer-link">Submit Results</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Links</p>
+        <ul class="footer-links">
+          <li><a href="https://arxiv.org/abs/2603.28660" class="footer-link" target="_blank" rel="noopener">Paper (arXiv)</a></li>
+          <li><a href="https://github.com/PointCloudYC/Industrial3D" class="footer-link" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://drive.google.com/drive/folders/1T6viLM-SKrDZBCaoKghgld2pIyRq6XLZ" class="footer-link" target="_blank" rel="noopener">Google Drive</a></li>
+          <li><a href="submit.html#cite" class="footer-link">Cite</a></li>
+          <li><a href="https://chaoyin.me" class="footer-link">← Author Homepage</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Industrial3D Authors. Dataset under review — preview materials available.</p>
+      <span class="footer-badge">GPL v3</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

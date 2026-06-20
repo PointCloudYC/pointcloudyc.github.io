@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <clipPath id="circle">
+      <circle cx="100" cy="100" r="100"/>
+    </clipPath>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="100" fill="#e8e8e8"/>
+  <g clip-path="url(#circle)">
+    <!-- Academic cap silhouette -->
+    <circle cx="100" cy="80" r="35" fill="#b0b0b0"/>
+    <path d="M60 135 Q80 115 100 115 Q120 115 140 135 L145 160 L55 160 Z" fill="#b0b0b0"/>
+  </g>
+  <!-- Hint text -->
+  <text x="100" y="180" text-anchor="middle" font-family="Verdana,sans-serif" font-size="10" fill="#999">Add your photo here</text>
+</svg>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Results — Industrial3D</title>
+  <meta name="description" content="Submit your benchmark results to the Industrial3D leaderboard. GitHub PR-based submission, evaluation protocol details, and citation information.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/nav.js" defer></script>
+</head>
+<body>
+
+<!-- ── Navigation ─────────────────────────────────────────── -->
+<header class="site-header">
+  <nav class="nav-container">
+    <div class="nav-brand">
+      <a href="index.html" class="brand-link">
+        <span class="brand-icon">⬡</span>
+        <span class="brand-name">Industrial3D</span>
+      </a>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html"      class="nav-link" data-page="index.html">Home</a></li>
+      <li><a href="dataset.html"    class="nav-link" data-page="dataset.html">Dataset</a></li>
+      <li><a href="benchmark.html"  class="nav-link" data-page="benchmark.html">Benchmark</a></li>
+      <li><a href="submit.html"     class="nav-link" data-page="submit.html">Submit</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon-dark">☽</span>
+        <span class="theme-icon-light">☀</span>
+      </button>
+      <a href="https://github.com/PointCloudYC/Industrial3D" class="btn-github" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        <span>GitHub</span>
+      </a>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- ── Page Hero ─────────────────────────────────────────────── -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <span class="section-label">Submissions</span>
+    <h1 class="page-title">Submit Your Results</h1>
+    <p class="page-desc">
+      Got better results on Industrial3D? Submit your method to the leaderboard via a GitHub PR or an issue — no registration required.
+    </p>
+  </div>
+</div>
+
+<!-- ── How to Submit ──────────────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="grid-2" style="gap:3rem;align-items:start">
+
+      <!-- PR method -->
+      <div>
+        <span class="section-label">Option A (recommended)</span>
+        <h2 class="section-title" style="font-size:1.6rem">Submit via Pull Request</h2>
+        <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:1.5rem;line-height:1.7">
+          The canonical way. Your submission is transparent, versioned, and linked to your GitHub identity.
+        </p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Fork the repository</h4>
+              <p>Fork <a href="https://github.com/PointCloudYC/Industrial3D" class="inline-link" target="_blank" rel="noopener">github.com/PointCloudYC/Industrial3D</a> to your GitHub account.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>Edit <code>website/data/leaderboard.json</code></h4>
+              <p>Append a new entry object to the <code>"entries"</code> array. See the required JSON schema below.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>Open a Pull Request</h4>
+              <p>Open a PR against the <code>main</code> branch of the upstream repo. Title it:</p>
+              <p><code>[Submission] MethodName — XX.XX% mIoU</code></p>
+              <p>In the PR body, include:</p>
+              <ul>
+                <li>Link to paper or preprint (arXiv preferred)</li>
+                <li>Link to code repository (required for verification)</li>
+                <li>Brief description of the method</li>
+                <li>Confirmation that you followed the standard evaluation protocol</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <h4>Review &amp; merge</h4>
+              <p>The Industrial3D team will verify your results (code + reproducibility check) and merge the PR. The leaderboard updates automatically on the next deployment.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:1.5rem">
+          <a href="https://github.com/PointCloudYC/Industrial3D/compare" class="btn btn-primary" target="_blank" rel="noopener">
+            Open a Pull Request →
+          </a>
+        </div>
+      </div>
+
+      <!-- Issue method -->
+      <div>
+        <span class="section-label">Option B</span>
+        <h2 class="section-title" style="font-size:1.6rem">Submit via GitHub Issue</h2>
+        <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:1.5rem;line-height:1.7">
+          For those not comfortable editing JSON. Open an issue with the Benchmark Submission template and we will add your results.
+        </p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Open a Benchmark Submission issue</h4>
+              <p>
+                Use the prefilled template at: <br>
+                <a href="https://github.com/PointCloudYC/Industrial3D/issues/new?template=benchmark-submission.yml" class="inline-link" target="_blank" rel="noopener">New Issue → Benchmark Submission</a>
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>Fill in all required fields</h4>
+              <p>Method name, paradigm, label budget, mIoU, paper link, code link, and evaluation protocol confirmation.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>We transcribe &amp; add</h4>
+              <p>The team reviews and manually adds your entry to the leaderboard JSON within ~7 days.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:1.5rem">
+          <a href="https://github.com/PointCloudYC/Industrial3D/issues/new?template=benchmark-submission.yml" class="btn btn-outline" target="_blank" rel="noopener">
+            Open Issue Template →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── JSON Schema ────────────────────────────────────────────── -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <span class="section-label">Format</span>
+    <h2 class="section-title">Required JSON Entry Schema</h2>
+    <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:1.25rem;line-height:1.7;max-width:60ch">
+      Add one object to the <code>"entries"</code> array in <code>website/data/leaderboard.json</code>. Required fields are marked with <span style="color:var(--danger)">*</span>.
+    </p>
+
+    <div class="schema-box">
+      <div class="schema-header">
+        <span class="schema-title">leaderboard.json — entry object</span>
+      </div>
+      <div class="schema-body">
+        <pre><code>{
+  "id":        &lt;next integer&gt;,          <span style="color:var(--text-muted)">// auto-increment from last entry</span>
+  "method":    "YourMethodName",         <span style="color:var(--text-muted)">// * short, recognisable name</span>
+  "paradigm":  "Fully-Supervised",       <span style="color:var(--text-muted)">// * one of the four paradigms below</span>
+  "labels":    "100%",                   <span style="color:var(--text-muted)">// * label budget used ("0%" for zero-shot)</span>
+  "miou":      52.34,                    <span style="color:var(--text-muted)">// * mIoU as a decimal number (not string)</span>
+  "oa":        null,                     <span style="color:var(--text-muted)">// overall accuracy (null if not reported)</span>
+  "year":      2026,                     <span style="color:var(--text-muted)">// * paper or preprint year</span>
+  "paper_url": "https://arxiv.org/...", <span style="color:var(--text-muted)">// * link to paper/preprint</span>
+  "code_url":  "https://github.com/...", <span style="color:var(--text-muted)">// * public code repo (required for verify)</span>
+  "submitter": "Your Name",             <span style="color:var(--text-muted)">// * your name or team name</span>
+  "verified":  false,                    <span style="color:var(--text-muted)">// set to false; authors flip to true</span>
+  "per_class": {                         <span style="color:var(--text-muted)">// optional but strongly encouraged</span>
+    "Duct": 89.1, "Elbow": 22.3, "Flange": 30.1,
+    "IBeam": 95.2, "Pipe": 72.5, "Pump": 5.1,
+    "RBeam": 93.0, "Reducer": 0.0, "Strainer": 0.0,
+    "Tank": 88.7, "Tee": 4.2, "Valve": 33.6
+  },
+  "notes": "Optional short note about the method or evaluation."
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:1.25rem;max-width:680px">
+      <h4 style="margin-bottom:0.65rem">Valid paradigm values</h4>
+      <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+        <span class="paradigm-pill paradigm-full">Fully-Supervised</span>
+        <span class="paradigm-pill paradigm-weak">Weakly-Supervised</span>
+        <span class="paradigm-pill paradigm-unsup">Unsupervised</span>
+        <span class="paradigm-pill paradigm-found">Foundation Model</span>
+      </div>
+      <p style="margin-top:0.75rem;font-size:0.82rem;color:var(--text-muted)">
+        If your method doesn't fit cleanly, use the closest paradigm and clarify in the PR description or notes field.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Evaluation Protocol ───────────────────────────────────── -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <span class="section-label">Protocol</span>
+    <h2 class="section-title">Evaluation Protocol Details</h2>
+
+    <div class="card" style="max-width:800px">
+      <div style="display:flex;flex-direction:column;gap:1rem">
+        <div style="padding-bottom:1rem;border-bottom:1px solid var(--border-faint)">
+          <h4 style="margin-bottom:0.4rem">Test Set</h4>
+          <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.7">
+            Held-out areas 6 (93m PSU / 99.2 VSPA-1) and 12 (Sludge Press House). 84.9M points, 13.9% of the dataset. Area 9 (15.1M points) is reserved for validation only — do not report test-set numbers tuned on Area 9.
+          </p>
+        </div>
+        <div style="padding-bottom:1rem;border-bottom:1px solid var(--border-faint)">
+          <h4 style="margin-bottom:0.4rem">Standard Evaluation</h4>
+          <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.7">
+            Vote-based smooth testing (<code>test_smooth = 0.95</code>) following the RandLA-Net / SQN convention. Run multiple passes over the test set and accumulate per-point logits before final argmax. Report the 12-class mIoU on the full test set.
+          </p>
+        </div>
+        <div style="padding-bottom:1rem;border-bottom:1px solid var(--border-faint)">
+          <h4 style="margin-bottom:0.4rem">Label Budget (Weakly-Supervised)</h4>
+          <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.7">
+            Specify the exact fraction of training-set points used as supervision. We report results for 0.01% and 0.1% budgets; other budgets are welcome. Pseudo-label variants should be described in the notes field.
+          </p>
+        </div>
+        <div>
+          <h4 style="margin-bottom:0.4rem">Foundation Model / Zero-Shot</h4>
+          <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.7">
+            Report the setting (e.g., zero-shot, few-shot N%, oracle matching) clearly. If using class name prompts or GT mask proposals, specify this in the notes field. Hungarian matching results should be accompanied by the matching protocol.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Citation ───────────────────────────────────────────────── -->
+<section class="section" style="padding-top:0" id="cite">
+  <div class="container">
+    <span class="section-label">Citation</span>
+    <h2 class="section-title">Cite Industrial3D</h2>
+    <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:0.5rem;max-width:60ch">
+      If you use Industrial3D in your research, please cite the dataset paper. We also ask that you cite the related work below if you compare against those methods.
+    </p>
+
+    <div class="citation-blocks">
+
+      <div class="citation-block">
+        <p class="citation-label">Primary — Industrial3D Dataset Paper</p>
+        <div style="position:relative">
+          <pre><code id="bibtex-main">@article{yin2026industrial3d,
+  title={Industrial3D: A Terrestrial LiDAR Point Cloud Dataset and
+         Cross-Paradigm Benchmark for Industrial Infrastructure},
+  author={Yin, Chao and Yue, Hongzhe and Han, Qing and Hu, Difeng and
+          Liang, Zhenyu and Lin, Fangzhou and Sun, Bing and Wang, Boyu and
+          Li, Mingkai and Yao, Wei and Cheng, Jack C.P.},
+  journal={arXiv preprint arXiv:2603.28660},
+  year={2026}
+}</code></pre>
+          <button class="btn-copy" onclick="copyBibtex('bibtex-main', this)">copy</button>
+        </div>
+      </div>
+
+      <div class="citation-block">
+        <p class="citation-label">Related — Companion Methods Paper (Dual Crisis Solutions)</p>
+        <div style="position:relative">
+          <pre><code id="bibtex-methods">@article{Yin2026arXiv,
+  title={Resolving Primitive-Sharing Ambiguity in Long-Tailed Industrial
+         Point Cloud Segmentation via Spatial Context Constraints},
+  author={Yin, Chao and Han, Qing and Hou, Zhiwei and Liu, Yue and
+          Dai, Anjin and Hu, Hongda and Yang, Ji and Yao, Wei},
+  journal={arXiv preprint arXiv:2601.19128},
+  eprint={2601.19128},
+  year={2026}
+}</code></pre>
+          <button class="btn-copy" onclick="copyBibtex('bibtex-methods', this)">copy</button>
+        </div>
+      </div>
+
+      <div class="citation-block">
+        <p class="citation-label">Related — ResPointNet++ / PSNet5 (Prior Supervised Baseline)</p>
+        <div style="position:relative">
+          <pre><code id="bibtex-respp">@article{yin2021,
+  title={Automated semantic segmentation of industrial point clouds
+         using ResPointNet++},
+  author={Yin, Chao and Wang, Boyu and Gan, Vincent JL and Wang, Mi
+          and Cheng, Jack CP},
+  journal={Automation in Construction},
+  volume={130},
+  pages={103874},
+  year={2021},
+  publisher={Elsevier},
+  doi={10.1016/j.autcon.2021.103874}
+}</code></pre>
+          <button class="btn-copy" onclick="copyBibtex('bibtex-respp', this)">copy</button>
+        </div>
+      </div>
+
+      <div class="citation-block">
+        <p class="citation-label">Related — SQN (Prior Weakly-Supervised Baseline)</p>
+        <div style="position:relative">
+          <pre><code id="bibtex-sqn">@article{yin2023,
+  title={Label-efficient semantic segmentation of large-scale industrial
+         point clouds using weakly supervised learning},
+  author={Yin, Chao and Yang, Bo and Cheng, Jack CP and Gan, Vincent JL
+          and Wang, Boyu and Yang, Ji},
+  journal={Automation in Construction},
+  volume={148},
+  pages={104757},
+  year={2023},
+  issn={0926-5805},
+  doi={10.1016/j.autcon.2023.104757}
+}</code></pre>
+          <button class="btn-copy" onclick="copyBibtex('bibtex-sqn', this)">copy</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="brand-link" style="margin-bottom:0.75rem">
+          <span class="brand-icon">⬡</span>
+          <span class="brand-name">Industrial3D</span>
+        </a>
+        <p class="footer-desc">
+          The largest publicly available industrial MEP point cloud dataset and cross-paradigm benchmark, from 7 water treatment facilities in Hong Kong.
+        </p>
+      </div>
+      <div>
+        <p class="footer-col-title">Pages</p>
+        <ul class="footer-links">
+          <li><a href="index.html"     class="footer-link">Home</a></li>
+          <li><a href="dataset.html"   class="footer-link">Dataset &amp; Download</a></li>
+          <li><a href="benchmark.html" class="footer-link">Benchmark</a></li>
+          <li><a href="submit.html"    class="footer-link">Submit Results</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Links</p>
+        <ul class="footer-links">
+          <li><a href="https://arxiv.org/abs/2603.28660" class="footer-link" target="_blank" rel="noopener">Paper (arXiv)</a></li>
+          <li><a href="https://github.com/PointCloudYC/Industrial3D" class="footer-link" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://drive.google.com/drive/folders/1T6viLM-SKrDZBCaoKghgld2pIyRq6XLZ" class="footer-link" target="_blank" rel="noopener">Google Drive</a></li>
+          <li><a href="submit.html#cite" class="footer-link">Cite</a></li>
+          <li><a href="https://chaoyin.me" class="footer-link">← Author Homepage</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Industrial3D Authors. Dataset under review — preview materials available.</p>
+      <span class="footer-badge">GPL v3</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function copyBibtex(id, btn) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var text = el.textContent;
+  navigator.clipboard.writeText(text).then(function () {
+    btn.textContent = 'copied ✓';
+    btn.classList.add('copied');
+    setTimeout(function () {
+      btn.textContent = 'copy';
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(function () {
+    /* Fallback for older browsers */
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = 'copied ✓';
+    btn.classList.add('copied');
+    setTimeout(function () {
+      btn.textContent = 'copy';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>

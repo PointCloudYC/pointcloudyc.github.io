@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="120" viewBox="0 0 160 120">
+  <rect width="160" height="120" fill="#f0f4ff" rx="4"/>
+  <rect x="20" y="15" width="120" height="4" rx="2" fill="#c0d0f0"/>
+  <rect x="20" y="28" width="90" height="4" rx="2" fill="#d0ddf5"/>
+  <rect x="20" y="50" width="120" height="30" rx="2" fill="#e0e8f8"/>
+  <rect x="20" y="55" width="60" height="4" rx="2" fill="#c0d0f0"/>
+  <rect x="20" y="65" width="80" height="4" rx="2" fill="#c8d8f2"/>
+  <rect x="20" y="95" width="120" height="2" rx="1" fill="#e0e8f8"/>
+  <rect x="20" y="103" width="100" height="2" rx="1" fill="#e8eef8"/>
+  <!-- Paper icon -->
+  <path d="M130 8 L130 32 L110 32 L110 8 Z" fill="#d0ddf5" stroke="#b0c8e8" stroke-width="1"/>
+</svg>
