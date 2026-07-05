@@ -135,15 +135,14 @@ h2 {
   padding-bottom: 11px;
 }
 
-h2::before {
-  content: '';
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  margin-right: 9px;
-  background: var(--ember);
-  transform: translateY(-1px);
-  border-radius: 1px;
+/* Friendly line-icon shown before each section heading */
+.h2-icon {
+  width: 17px;
+  height: 17px;
+  margin-right: 8px;
+  vertical-align: -3px;
+  color: var(--ember);
+  flex-shrink: 0;
 }
 
 h2::after {
@@ -532,10 +531,11 @@ h3 {
 
 /* GitHub star count badge */
 .stars {
+  display: inline-block;
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--ember);
-  margin-left: -6px;
+  margin-left: 2px;
 }
 
 /* BibTeX box (hidden until toggled) */
