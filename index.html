@@ -56,6 +56,40 @@
       setTimeout(function () { btn.innerText = orig; }, 1500);
     });
   }
+
+  // Paper figure lightbox — click a highlight image to view it full-size; Esc or backdrop click closes it
+  function openLightbox(imgEl) {
+    if (!imgEl || imgEl.src.indexOf('paper_placeholder') !== -1) return;
+    var lb = document.getElementById('lightbox');
+    var lbImg = document.getElementById('lightbox-img');
+    lbImg.src = imgEl.src;
+    lbImg.alt = imgEl.alt;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    var lb = document.getElementById('lightbox');
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // Live GitHub star counts — fetches current stargazers_count for any [data-gh-repo] badge
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('[data-gh-repo]').forEach(function (el) {
+      var repo = el.getAttribute('data-gh-repo');
+      fetch('https://api.github.com/repos/' + repo)
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (data) {
+          if (data && typeof data.stargazers_count === 'number') {
+            el.textContent = '★ ' + data.stargazers_count;
+          }
+        })
+        .catch(function () {});
+    });
+  });
 </script>
 
 <table width="820" border="0" align="center" cellspacing="0" cellpadding="0">
@@ -74,23 +108,18 @@
       <table width="100%" align="center" border="0" cellspacing="0" cellpadding="12">
         <tr>
           <td width="67%" valign="middle">
-            <p class="name">Chao YIN <span style="color:#777;font-weight:normal">(尹超)</span></p>
-            <p style="text-align: center; font-size: 16px; margin-top: -8px;">
-              <strong>Research Scientist</strong>
-            </p>
-            <p style="text-align: center; font-size: 14px; color: #555; margin-top: -8px;">
-              Point Cloud Intelligent Processing &amp; BIM Modeling
-            </p>
+            <p class="name">Chao YIN <span style="color:var(--ink-faint);font-weight:normal">(尹超)</span></p>
+            <p class="role-title">Research Scientist</p>
+            <p class="role-sub">Point Cloud Intelligent Processing &amp; BIM Modeling</p>
             <p style="text-align: justify; font-size: 14px; line-height: 1.5; margin-top: 12px;">
-              I am a research scientist working on <strong>point cloud intelligent processing</strong> and
-              <strong>BIM modeling</strong>. I earned my PhD from the Hong Kong University of Science and
-              Technology (HKUST) from 2018 Aug to 2022 Aug, advised by
-              <a href="https://facultyprofiles.hkust.edu.hk/profiles.php?profile=jack-chin-pang-cheng-cejcheng" target="_blank">Prof. Jack C.P. Cheng</a>,
-              and my MPhil in Cartography and Geographic Information Systems from Wuhan University (2013), advised by
-              <a href="https://rsgis.whu.edu.cn/info/1004/7291.htm" target="_blank">Prof. Zhongliang Fu</a>.
-              My research spans <strong>3D point cloud processing</strong>, <strong>deep learning</strong>,
-              <strong>multi-modal AI</strong> (foundation models and 2D/3D LLMs),
-              <strong>weakly-supervised and long-tailed learning</strong>, and <strong>remote sensing applications</strong>.
+              Hi, I'm Chao &mdash; a research scientist working on <strong>point cloud intelligent processing</strong>
+              and <strong>BIM modeling</strong>. PhD from HKUST (2018&ndash;2022, advised by
+              <a href="https://facultyprofiles.hkust.edu.hk/profiles.php?profile=jack-chin-pang-cheng-cejcheng" target="_blank">Prof. Jack C.P. Cheng</a>);
+              MPhil from Wuhan University (2013, advised by
+              <a href="https://rsgis.whu.edu.cn/info/1004/7291.htm" target="_blank">Prof. Zhongliang Fu</a>).
+              My research spans <strong>3D point clouds</strong>, <strong>deep learning</strong>,
+              <strong>multi-modal AI</strong> (foundation models and 2D/3D LLMs), <strong>weakly-supervised
+              and long-tailed learning</strong>, and <strong>remote sensing</strong>.
             </p>
             <p class="links">
               <a href="https://scholar.google.com/citations?user=MD3X7kwAAAAJ&hl=en" target="_blank"><img class="ico" src="static/img/icons/googlescholar.svg" alt="">Google Scholar</a>
@@ -125,7 +154,8 @@
         <li class="news-item">
           <span class="news-date">[2026]</span>
           New paper on <strong>multimodal LLMs for indoor building component understanding</strong>
-          accepted to <em>Automation in Construction</em>.
+          published in <em>Automation in Construction</em>.
+          <a href="https://doi.org/10.1016/j.autcon.2026.107117" target="_blank">[DOI]</a>
         </li>
         <li class="news-item">
           <span class="news-date">[2026]</span>
@@ -160,18 +190,109 @@
       <!-- ===== END NEWS ===== -->
 
       <!-- ===== PUBLICATIONS ===== -->
-      <h2>Publications</h2>
+      <h2>Publications <span class="h3-note">(Selected; * denotes corresponding author; <span class="pub-highlight">highlighted</span> = key works)</span></h2>
+      <p class="pub-note">For the complete list, see my <a href="https://scholar.google.com/citations?user=MD3X7kwAAAAJ&hl=en" target="_blank">Google Scholar</a> profile.</p>
+
+      <!-- Preprints -->
+      <h3>Preprints</h3>
+
+      <!-- Industrial3D -->
+      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8" class="pub-row pub-featured">
+        <tr>
+          <td width="20%" valign="top" style="text-align: center; padding: 4px;">
+            <div class="one" onmouseover="paper_start('pp1_overlay')" onmouseout="paper_stop('pp1_overlay')">
+              <img class="paper-thumb zoomable" src="static/img/papers/industrial3d.jpg" onclick="openLightbox(this)" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="Industrial3D dataset benchmark">
+              <span class="thumb-hint">&#10530;</span>
+              <div class="two" id="pp1_overlay">
+                <img class="paper-thumb" src="static/img/paper_placeholder_hover.svg" alt="Industrial3D overlay">
+              </div>
+            </div>
+          </td>
+          <td width="80%" valign="top" style="padding: 4px;">
+            <p style="margin-top: 0; margin-bottom: 2px;">
+              <span class="papertitle">Industrial3D: A Terrestrial LiDAR Point Cloud Dataset and Cross-Paradigm Benchmark for Industrial Infrastructure</span>
+            </p>
+            <p style="margin: 2px 0; font-size: 13px;">
+              <b>Chao YIN</b>, H. Yue, Q. Han, D. Hu, Z. Liang, F. Lin, B. Sun, B. Wang, M. Li, W. Yao, J. C. P. Cheng
+            </p>
+            <p style="margin: 2px 0;">
+              arXiv:2603.28660, 2026
+            </p>
+            <p class="pub-links">
+              <a href="https://arxiv.org/abs/2603.28660" target="_blank"><img class="ico" src="static/img/icons/arxiv.svg" alt="">arXiv</a>
+              <a href="https://github.com/pointcloudyc/Industrial3D" target="_blank"><img class="ico" src="static/img/icons/github.svg" alt="">Code &amp; Dataset</a> <span class="stars" data-gh-repo="PointCloudYC/Industrial3D">&#9733; 11</span>
+              <a href="industrial3d/index.html"><img class="ico" src="static/img/icons/blog.svg" alt="">Project Page</a>
+              <a href="javascript:void(0)" onclick="toggleBib('bib_pp1')"><img class="ico" src="static/img/icons/bibtex.svg" alt="">BibTeX</a>
+            </p>
+            <div class="bibtex-box" id="bib_pp1">
+              <button class="bib-copy" onclick="copyBib('bib_pp1')">Copy</button>
+              <pre>@article{yin2026industrial3d,
+  title   = {Industrial3D: A Terrestrial LiDAR Point Cloud Dataset and Cross-Paradigm Benchmark for Industrial Infrastructure},
+  author  = {Yin, Chao and Yue, H. and Han, Q. and Hu, D. and Liang, Z. and Lin, F. and Sun, B. and Wang, B. and Li, M. and Yao, W. and Cheng, Jack C. P.},
+  journal = {arXiv preprint arXiv:2603.28660},
+  year    = {2026}
+}</pre>
+            </div>
+            <p style="margin: 4px 0; font-size: 13px; color: #555;">
+              <strong>Industrial3D</strong> &mdash; the largest terrestrial LiDAR dataset for industrial MEP facilities, with 612 million labelled points across 13 water treatment plants (6.6&times; larger than any comparable dataset). Its cross-paradigm benchmark evaluates 9 methods across supervised, weakly-supervised, unsupervised, and foundation-model settings.
+            </p>
+          </td>
+        </tr>
+      </table>
+
+      <!-- Resolving Primitive-Sharing Ambiguity -->
+      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8" class="pub-row pub-featured">
+        <tr>
+          <td width="20%" valign="top" style="text-align: center; padding: 4px;">
+            <div class="one" onmouseover="paper_start('pp2_overlay')" onmouseout="paper_stop('pp2_overlay')">
+              <img class="paper-thumb zoomable" src="static/img/papers/longtail3d.jpg" onclick="openLightbox(this)" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="Long-tail segmentation resolving ambiguity">
+              <span class="thumb-hint">&#10530;</span>
+              <div class="two" id="pp2_overlay">
+                <img class="paper-thumb" src="static/img/paper_placeholder_hover.svg" alt="Resolving ambiguity overlay">
+              </div>
+            </div>
+          </td>
+          <td width="80%" valign="top" style="padding: 4px;">
+            <p style="margin-top: 0; margin-bottom: 2px;">
+              <span class="papertitle">Resolving Primitive-Sharing Ambiguity in Long-Tailed Industrial Point Cloud Segmentation via Spatial Context Constraints</span>
+            </p>
+            <p style="margin: 2px 0; font-size: 13px;">
+              <b>Chao YIN</b>, Q. Han, Z. Hou, Y. Liu, A. Dai, H. Hu, J. Yang, W. Yao
+            </p>
+            <p style="margin: 2px 0;">
+              arXiv:2601.19128, 2026
+            </p>
+            <p class="pub-links">
+              <a href="https://arxiv.org/abs/2601.19128" target="_blank"><img class="ico" src="static/img/icons/arxiv.svg" alt="">arXiv</a>
+              <a href="https://github.com/PointCloudYC/LongTail3D" target="_blank"><img class="ico" src="static/img/icons/github.svg" alt="">Code</a>
+              <a href="javascript:void(0)" onclick="toggleBib('bib_pp2')"><img class="ico" src="static/img/icons/bibtex.svg" alt="">BibTeX</a>
+            </p>
+            <div class="bibtex-box" id="bib_pp2">
+              <button class="bib-copy" onclick="copyBib('bib_pp2')">Copy</button>
+              <pre>@article{yin2026resolving,
+  title   = {Resolving Primitive-Sharing Ambiguity in Long-Tailed Industrial Point Cloud Segmentation via Spatial Context Constraints},
+  author  = {Yin, Chao and Han, Q. and Hou, Z. and Liu, Y. and Dai, A. and Hu, H. and Yang, J. and Yao, W.},
+  journal = {arXiv preprint arXiv:2601.19128},
+  year    = {2026}
+}</pre>
+            </div>
+            <p style="margin: 4px 0; font-size: 13px; color: #555;">
+              Boundary-CB and Density-CB &mdash; two plug-and-play loss modules that resolve geometric ambiguity in long-tailed industrial point cloud segmentation. Achieves 55.74% mIoU on Industrial3D with a 21.7% relative gain on tail classes (reducer: 0% &rarr; 21.12%).
+            </p>
+          </td>
+        </tr>
+      </table>
 
       <!-- Published Journal Papers -->
-      <h3>Published Journal Papers <span class="h3-note">(Selected; * denotes corresponding author; <span class="pub-highlight">yellow</span> = key works)</span></h3>
-      <p class="pub-note">For the full and up-to-date list, see my <a href="https://scholar.google.com/citations?user=MD3X7kwAAAAJ&hl=en" target="_blank">Google Scholar</a> profile.</p>
+      <h3>Published Journal Papers</h3>
 
       <!-- Paper 0: From Geometric Labels (AIC, accepted) -->
-      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8">
-        <tr bgcolor="#ffffd0">
+      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8" class="pub-row pub-featured">
+        <tr>
           <td width="20%" valign="top" style="text-align: center; padding: 4px;">
             <div class="one" onmouseover="paper_start('pacc_overlay')" onmouseout="paper_stop('pacc_overlay')">
-              <img class="paper-thumb" src="static/img/papers/geometric-labels-llm.jpg" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="Multimodal LLM building components thumbnail">
+              <img class="paper-thumb zoomable" src="static/img/papers/Building-MLLM.png" onclick="openLightbox(this)" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="Multimodal LLM building components thumbnail">
+              <span class="thumb-hint">&#10530;</span>
               <div class="two" id="pacc_overlay">
                 <img class="paper-thumb" src="static/img/paper_placeholder_hover.svg" alt="Multimodal LLM overlay">
               </div>
@@ -185,20 +306,24 @@
               S. Jing, <b>Chao YIN*</b>
             </p>
             <p style="margin: 2px 0;">
-              <em>Automation in Construction</em>, 2026
-              <span class="venue-label">JCR Q1, IF: 10.5</span>
-              <font color="red"><b> [Accepted]</b></font>
+              <em>Automation in Construction</em>, vol. 190, p. 107117, 2026
+              <span class="venue-label">JCR Q1, IF: 12.7</span>
             </p>
             <p class="pub-links">
+              <a href="https://doi.org/10.1016/j.autcon.2026.107117" target="_blank"><img class="ico" src="static/img/icons/doi.svg" alt="">DOI</a>
               <a href="javascript:void(0)" onclick="toggleBib('bib_pacc')"><img class="ico" src="static/img/icons/bibtex.svg" alt="">BibTeX</a>
             </p>
             <div class="bibtex-box" id="bib_pacc">
               <button class="bib-copy" onclick="copyBib('bib_pacc')">Copy</button>
               <pre>@article{jing2026geometric,
-  title   = {From Geometric Labels to Semantic Understanding of Indoor Building Components Using Multimodal Large Language Models},
-  author  = {Jing, S. and Yin, Chao},
+  title   = {From geometric labels to semantic understanding of indoor building components using multimodal large language models},
+  author  = {Jing, Shuju and Yin, Chao},
   journal = {Automation in Construction},
-  year    = {2026}
+  volume  = {190},
+  pages   = {107117},
+  year    = {2026},
+  issn    = {0926-5805},
+  doi     = {10.1016/j.autcon.2026.107117}
 }</pre>
             </div>
             <p style="margin: 4px 0; font-size: 13px; color: #555;">
@@ -209,11 +334,12 @@
       </table>
 
       <!-- Paper 1: Semi-Supervised AI for Architectural Heritage (2026) — de-highlighted (off-direction) -->
-      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8">
+      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8" class="pub-row">
         <tr>
           <td width="20%" valign="top" style="text-align: center; padding: 4px;">
             <div class="one" onmouseover="paper_start('p00_overlay')" onmouseout="paper_stop('p00_overlay')">
-              <img class="paper-thumb" src="static/img/papers/heritage-semisup.jpg" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="Heritage classification thumbnail">
+              <img class="paper-thumb zoomable" src="static/img/papers/CTSMatch.png" onclick="openLightbox(this)" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="Heritage classification thumbnail">
+              <span class="thumb-hint">&#10530;</span>
               <div class="two" id="p00_overlay">
                 <img class="paper-thumb" src="static/img/paper_placeholder_hover.svg" alt="Heritage classification overlay">
               </div>
@@ -255,17 +381,9 @@
       </table>
 
       <!-- Paper 2: Omni-Scan2BIM (2024) -->
-      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8">
+      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8" class="pub-row">
         <tr>
-          <td width="20%" valign="top" style="text-align: center; padding: 4px;">
-            <div class="one" onmouseover="paper_start('p01_overlay')" onmouseout="paper_stop('p01_overlay')">
-              <img class="paper-thumb" src="static/img/papers/omni-scan2bim.jpg" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="Omni-Scan2BIM thumbnail">
-              <div class="two" id="p01_overlay">
-                <img class="paper-thumb" src="static/img/paper_placeholder_hover.svg" alt="Omni-Scan2BIM overlay">
-              </div>
-            </div>
-          </td>
-          <td width="80%" valign="top" style="padding: 4px;">
+          <td width="100%" valign="top" style="padding: 4px;">
             <p style="margin-top: 0; margin-bottom: 2px;">
               <span class="papertitle">Omni-Scan2BIM: A ready-to-use Scan2BIM approach based on vision foundation models for MEP scenes</span>
             </p>
@@ -274,7 +392,7 @@
             </p>
             <p style="margin: 2px 0;">
               <em>Automation in Construction</em>, vol. 162, p. 105384, 2024
-              <span class="venue-label">JCR Q1, IF: 10.5</span>
+              <span class="venue-label">JCR Q1, IF: 12.7</span>
             </p>
             <p class="pub-links">
               <a href="https://doi.org/10.1016/j.autcon.2024.105384" target="_blank"><img class="ico" src="static/img/icons/doi.svg" alt="">DOI</a>
@@ -300,11 +418,12 @@
       </table>
 
       <!-- Paper 2: Weakly supervised (2023) -->
-      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8">
-        <tr bgcolor="#ffffd0">
+      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8" class="pub-row pub-featured">
+        <tr>
           <td width="20%" valign="top" style="text-align: center; padding: 4px;">
             <div class="one" onmouseover="paper_start('p02_overlay')" onmouseout="paper_stop('p02_overlay')">
-              <img class="paper-thumb" src="static/img/papers/weakly-supervised.jpg" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="Weakly supervised segmentation thumbnail">
+              <img class="paper-thumb zoomable" src="static/img/papers/WSSS-ST.png" onclick="openLightbox(this)" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="Weakly supervised segmentation thumbnail">
+              <span class="thumb-hint">&#10530;</span>
               <div class="two" id="p02_overlay">
                 <img class="paper-thumb" src="static/img/paper_placeholder_hover.svg" alt="Weakly supervised overlay">
               </div>
@@ -319,11 +438,11 @@
             </p>
             <p style="margin: 2px 0;">
               <em>Automation in Construction</em>, vol. 148, p. 104757, 2023
-              <span class="venue-label">JCR Q1, IF: 10.5</span>
+              <span class="venue-label">JCR Q1, IF: 12.7</span>
             </p>
             <p class="pub-links">
               <a href="https://doi.org/10.1016/j.autcon.2023.104757" target="_blank"><img class="ico" src="static/img/icons/doi.svg" alt="">DOI</a>
-              <a href="https://github.com/PointCloudYC/SQN_tensorflow" target="_blank"><img class="ico" src="static/img/icons/github.svg" alt="">SQN-TensorFlow</a><span class="stars">&#9733; 14</span>
+              <a href="https://github.com/PointCloudYC/SQN_tensorflow" target="_blank"><img class="ico" src="static/img/icons/github.svg" alt="">SQN-TensorFlow</a><span class="stars" data-gh-repo="PointCloudYC/SQN_tensorflow">&#9733; 14</span>
               <a href="https://github.com/PointCloudYC/SQN-pytorch" target="_blank"><img class="ico" src="static/img/icons/github.svg" alt="">SQN-PyTorch</a>
               <a href="javascript:void(0)" onclick="toggleBib('bib_p02')"><img class="ico" src="static/img/icons/bibtex.svg" alt="">BibTeX</a>
             </p>
@@ -347,17 +466,9 @@
       </table>
 
       <!-- Paper 3: Robot-assisted (2023) -->
-      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8">
+      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8" class="pub-row">
         <tr>
-          <td width="20%" valign="top" style="text-align: center; padding: 4px;">
-            <div class="one" onmouseover="paper_start('p03_overlay')" onmouseout="paper_stop('p03_overlay')">
-              <img class="paper-thumb" src="static/img/papers/robot-scanning.jpg" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="Robot-assisted scanning thumbnail">
-              <div class="two" id="p03_overlay">
-                <img class="paper-thumb" src="static/img/paper_placeholder_hover.svg" alt="Robot-assisted overlay">
-              </div>
-            </div>
-          </td>
-          <td width="80%" valign="top" style="padding: 4px;">
+          <td width="100%" valign="top" style="padding: 4px;">
             <p style="margin-top: 0; margin-bottom: 2px;">
               <span class="papertitle">Robot-assisted mobile scanning for automated 3D reconstruction and point cloud semantic segmentation of building interiors</span>
             </p>
@@ -366,7 +477,7 @@
             </p>
             <p style="margin: 2px 0;">
               <em>Automation in Construction</em>, vol. 152, p. 104949, 2023
-              <span class="venue-label">JCR Q1, IF: 10.5</span>
+              <span class="venue-label">JCR Q1, IF: 12.7</span>
             </p>
             <p class="pub-links">
               <a href="https://doi.org/10.1016/j.autcon.2023.104949" target="_blank"><img class="ico" src="static/img/icons/doi.svg" alt="">DOI</a>
@@ -392,11 +503,12 @@
       </table>
 
       <!-- Paper 4: SE-PseudoGrid (2022) -->
-      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8">
-        <tr bgcolor="#ffffd0">
+      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8" class="pub-row pub-featured">
+        <tr>
           <td width="20%" valign="top" style="text-align: center; padding: 4px;">
             <div class="one" onmouseover="paper_start('p04_overlay')" onmouseout="paper_stop('p04_overlay')">
-              <img class="paper-thumb" src="static/img/papers/se-pseudogrid.jpg" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="SE-PseudoGrid thumbnail">
+              <img class="paper-thumb zoomable" src="static/img/papers/SE-PseudoGrid.png" onclick="openLightbox(this)" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="SE-PseudoGrid thumbnail">
+              <span class="thumb-hint">&#10530;</span>
               <div class="two" id="p04_overlay">
                 <img class="paper-thumb" src="static/img/paper_placeholder_hover.svg" alt="SE-PseudoGrid overlay">
               </div>
@@ -411,7 +523,7 @@
             </p>
             <p style="margin: 2px 0;">
               <em>Automation in Construction</em>, vol. 139, p. 104300, 2022
-              <span class="venue-label">JCR Q1, IF: 10.5</span>
+              <span class="venue-label">JCR Q1, IF: 12.7</span>
             </p>
             <p class="pub-links">
               <a href="https://doi.org/10.1016/j.autcon.2022.104300" target="_blank"><img class="ico" src="static/img/icons/doi.svg" alt="">DOI</a>
@@ -438,11 +550,12 @@
       </table>
 
       <!-- Paper 5: Chinese Traditional Settlements (2022) -->
-      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8">
+      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8" class="pub-row">
         <tr>
           <td width="20%" valign="top" style="text-align: center; padding: 4px;">
             <div class="one" onmouseover="paper_start('p05_overlay')" onmouseout="paper_stop('p05_overlay')">
-              <img class="paper-thumb" src="static/img/papers/settlements.jpg" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="Chinese traditional settlements thumbnail">
+              <img class="paper-thumb zoomable" src="static/img/papers/CTS.jpg" onclick="openLightbox(this)" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="Chinese traditional settlements thumbnail">
+              <span class="thumb-hint">&#10530;</span>
               <div class="two" id="p05_overlay">
                 <img class="paper-thumb" src="static/img/paper_placeholder_hover.svg" alt="Chinese traditional settlements overlay">
               </div>
@@ -484,17 +597,9 @@
       </table>
 
       <!-- Paper 6: Vision-assisted BIM (2022) -->
-      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8">
+      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8" class="pub-row">
         <tr>
-          <td width="20%" valign="top" style="text-align: center; padding: 4px;">
-            <div class="one" onmouseover="paper_start('p06_overlay')" onmouseout="paper_stop('p06_overlay')">
-              <img class="paper-thumb" src="static/img/papers/vision-bim.jpg" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="Vision-assisted BIM thumbnail">
-              <div class="two" id="p06_overlay">
-                <img class="paper-thumb" src="static/img/paper_placeholder_hover.svg" alt="Vision-assisted BIM overlay">
-              </div>
-            </div>
-          </td>
-          <td width="80%" valign="top" style="padding: 4px;">
+          <td width="100%" valign="top" style="padding: 4px;">
             <p style="margin-top: 0; margin-bottom: 2px;">
               <span class="papertitle">Vision-assisted BIM reconstruction from 3D LiDAR point clouds for MEP scenes</span>
             </p>
@@ -503,7 +608,7 @@
             </p>
             <p style="margin: 2px 0;">
               <em>Automation in Construction</em>, vol. 133, p. 103997, 2022
-              <span class="venue-label">JCR Q1, IF: 10.5</span>
+              <span class="venue-label">JCR Q1, IF: 12.7</span>
             </p>
             <p class="pub-links">
               <a href="https://doi.org/10.1016/j.autcon.2021.103997" target="_blank"><img class="ico" src="static/img/icons/doi.svg" alt="">DOI</a>
@@ -529,17 +634,9 @@
       </table>
 
       <!-- Paper 7: Object verification (2022) -->
-      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8">
+      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8" class="pub-row">
         <tr>
-          <td width="20%" valign="top" style="text-align: center; padding: 4px;">
-            <div class="one" onmouseover="paper_start('p07_overlay')" onmouseout="paper_stop('p07_overlay')">
-              <img class="paper-thumb" src="static/img/papers/object-verification.jpg" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="Object verification thumbnail">
-              <div class="two" id="p07_overlay">
-                <img class="paper-thumb" src="static/img/paper_placeholder_hover.svg" alt="Object verification overlay">
-              </div>
-            </div>
-          </td>
-          <td width="80%" valign="top" style="padding: 4px;">
+          <td width="100%" valign="top" style="padding: 4px;">
             <p style="margin-top: 0; margin-bottom: 2px;">
               <span class="papertitle">Object verification based on deep learning point feature comparison for scan-to-BIM</span>
             </p>
@@ -548,7 +645,7 @@
             </p>
             <p style="margin: 2px 0;">
               <em>Automation in Construction</em>, vol. 142, p. 104515, 2022
-              <span class="venue-label">JCR Q1, IF: 10.5</span>
+              <span class="venue-label">JCR Q1, IF: 12.7</span>
             </p>
             <p class="pub-links">
               <a href="https://doi.org/10.1016/j.autcon.2022.104515" target="_blank"><img class="ico" src="static/img/icons/doi.svg" alt="">DOI</a>
@@ -574,11 +671,12 @@
       </table>
 
       <!-- Paper 8: ResPointNet++ (2021) -->
-      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8">
-        <tr bgcolor="#ffffd0">
+      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8" class="pub-row pub-featured">
+        <tr>
           <td width="20%" valign="top" style="text-align: center; padding: 4px;">
             <div class="one" onmouseover="paper_start('p08_overlay')" onmouseout="paper_stop('p08_overlay')">
-              <img class="paper-thumb" src="static/img/papers/respointnet.jpg" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="ResPointNet++ thumbnail">
+              <img class="paper-thumb zoomable" src="static/img/papers/ResPointNet++.png" onclick="openLightbox(this)" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="ResPointNet++ thumbnail">
+              <span class="thumb-hint">&#10530;</span>
               <div class="two" id="p08_overlay">
                 <img class="paper-thumb" src="static/img/paper_placeholder_hover.svg" alt="ResPointNet++ overlay">
               </div>
@@ -593,11 +691,11 @@
             </p>
             <p style="margin: 2px 0;">
               <em>Automation in Construction</em>, vol. 130, p. 103874, 2021
-              <span class="venue-label">JCR Q1, IF: 10.5</span>
+              <span class="venue-label">JCR Q1, IF: 12.7</span>
             </p>
             <p class="pub-links">
               <a href="https://doi.org/10.1016/j.autcon.2021.103874" target="_blank"><img class="ico" src="static/img/icons/doi.svg" alt="">DOI</a>
-              <a href="https://github.com/PointCloudYC/ResPointNet2" target="_blank"><img class="ico" src="static/img/icons/github.svg" alt="">Code</a><span class="stars">&#9733; 44</span>
+              <a href="https://github.com/PointCloudYC/ResPointNet2" target="_blank"><img class="ico" src="static/img/icons/github.svg" alt="">Code</a><span class="stars" data-gh-repo="PointCloudYC/ResPointNet2">&#9733; 45</span>
               <a href="javascript:void(0)" onclick="toggleBib('bib_p08')"><img class="ico" src="static/img/icons/bibtex.svg" alt="">BibTeX</a>
             </p>
             <div class="bibtex-box" id="bib_p08">
@@ -620,17 +718,9 @@
       </table>
 
       <!-- Paper 9: Parametric BIM (2021) -->
-      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8">
+      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8" class="pub-row">
         <tr>
-          <td width="20%" valign="top" style="text-align: center; padding: 4px;">
-            <div class="one" onmouseover="paper_start('p09_overlay')" onmouseout="paper_stop('p09_overlay')">
-              <img class="paper-thumb" src="static/img/papers/parametric-bim.jpg" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="Parametric BIM thumbnail">
-              <div class="two" id="p09_overlay">
-                <img class="paper-thumb" src="static/img/paper_placeholder_hover.svg" alt="Parametric BIM overlay">
-              </div>
-            </div>
-          </td>
-          <td width="80%" valign="top" style="padding: 4px;">
+          <td width="100%" valign="top" style="padding: 4px;">
             <p style="margin-top: 0; margin-bottom: 2px;">
               <span class="papertitle">Fully automated generation of parametric BIM for MEP scenes based on terrestrial laser scanning data</span>
             </p>
@@ -639,7 +729,7 @@
             </p>
             <p style="margin: 2px 0;">
               <em>Automation in Construction</em>, vol. 125, p. 103615, 2021
-              <span class="venue-label">JCR Q1, IF: 10.5</span>
+              <span class="venue-label">JCR Q1, IF: 12.7</span>
             </p>
             <p class="pub-links">
               <a href="https://doi.org/10.1016/j.autcon.2021.103615" target="_blank"><img class="ico" src="static/img/icons/doi.svg" alt="">DOI</a>
@@ -664,98 +754,10 @@
         </tr>
       </table>
 
-      <!-- Preprints -->
-      <h3>Preprints</h3>
-
-      <!-- Industrial3D -->
-      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8">
-        <tr bgcolor="#ffffd0">
-          <td width="20%" valign="top" style="text-align: center; padding: 4px;">
-            <div class="one" onmouseover="paper_start('pp1_overlay')" onmouseout="paper_stop('pp1_overlay')">
-              <img class="paper-thumb" src="static/img/papers/industrial3d.jpg" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="Industrial3D dataset benchmark">
-              <div class="two" id="pp1_overlay">
-                <img class="paper-thumb" src="static/img/paper_placeholder_hover.svg" alt="Industrial3D overlay">
-              </div>
-            </div>
-          </td>
-          <td width="80%" valign="top" style="padding: 4px;">
-            <p style="margin-top: 0; margin-bottom: 2px;">
-              <span class="papertitle">Industrial3D: A Terrestrial LiDAR Point Cloud Dataset and Cross-Paradigm Benchmark for Industrial Infrastructure</span>
-            </p>
-            <p style="margin: 2px 0; font-size: 13px;">
-              <b>Chao YIN</b>, H. Yue, Q. Han, D. Hu, Z. Liang, F. Lin, B. Sun, B. Wang, M. Li, W. Yao, J. C. P. Cheng
-            </p>
-            <p style="margin: 2px 0;">
-              arXiv:2603.28660, 2026
-            </p>
-            <p class="pub-links">
-              <a href="https://arxiv.org/abs/2603.28660" target="_blank"><img class="ico" src="static/img/icons/arxiv.svg" alt="">arXiv</a>
-              <a href="https://github.com/pointcloudyc/Industrial3D" target="_blank"><img class="ico" src="static/img/icons/github.svg" alt="">Code &amp; Dataset</a>
-              <a href="industrial3d/index.html"><img class="ico" src="static/img/icons/blog.svg" alt="">Project Page</a>
-              <a href="javascript:void(0)" onclick="toggleBib('bib_pp1')"><img class="ico" src="static/img/icons/bibtex.svg" alt="">BibTeX</a>
-            </p>
-            <div class="bibtex-box" id="bib_pp1">
-              <button class="bib-copy" onclick="copyBib('bib_pp1')">Copy</button>
-              <pre>@article{yin2026industrial3d,
-  title   = {Industrial3D: A Terrestrial LiDAR Point Cloud Dataset and Cross-Paradigm Benchmark for Industrial Infrastructure},
-  author  = {Yin, Chao and Yue, H. and Han, Q. and Hu, D. and Liang, Z. and Lin, F. and Sun, B. and Wang, B. and Li, M. and Yao, W. and Cheng, Jack C. P.},
-  journal = {arXiv preprint arXiv:2603.28660},
-  year    = {2026}
-}</pre>
-            </div>
-            <p style="margin: 4px 0; font-size: 13px; color: #555;">
-              <strong>Industrial3D</strong> &mdash; the largest terrestrial LiDAR dataset for industrial MEP facilities, with 612 million labelled points across 13 water treatment plants (6.6&times; larger than any comparable dataset). Its cross-paradigm benchmark evaluates 9 methods across supervised, weakly-supervised, unsupervised, and foundation-model settings.
-            </p>
-          </td>
-        </tr>
-      </table>
-
-      <!-- Resolving Primitive-Sharing Ambiguity -->
-      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="8">
-        <tr bgcolor="#ffffd0">
-          <td width="20%" valign="top" style="text-align: center; padding: 4px;">
-            <div class="one" onmouseover="paper_start('pp2_overlay')" onmouseout="paper_stop('pp2_overlay')">
-              <img class="paper-thumb" src="static/img/papers/longtail3d.jpg" onerror="this.onerror=null;this.src='static/img/paper_placeholder.svg'" alt="Long-tail segmentation resolving ambiguity">
-              <div class="two" id="pp2_overlay">
-                <img class="paper-thumb" src="static/img/paper_placeholder_hover.svg" alt="Resolving ambiguity overlay">
-              </div>
-            </div>
-          </td>
-          <td width="80%" valign="top" style="padding: 4px;">
-            <p style="margin-top: 0; margin-bottom: 2px;">
-              <span class="papertitle">Resolving Primitive-Sharing Ambiguity in Long-Tailed Industrial Point Cloud Segmentation via Spatial Context Constraints</span>
-            </p>
-            <p style="margin: 2px 0; font-size: 13px;">
-              <b>Chao YIN</b>, Q. Han, Z. Hou, Y. Liu, A. Dai, H. Hu, J. Yang, W. Yao
-            </p>
-            <p style="margin: 2px 0;">
-              arXiv:2601.19128, 2026
-            </p>
-            <p class="pub-links">
-              <a href="https://arxiv.org/abs/2601.19128" target="_blank"><img class="ico" src="static/img/icons/arxiv.svg" alt="">arXiv</a>
-              <a href="https://github.com/PointCloudYC/LongTail3D" target="_blank"><img class="ico" src="static/img/icons/github.svg" alt="">Code</a>
-              <a href="javascript:void(0)" onclick="toggleBib('bib_pp2')"><img class="ico" src="static/img/icons/bibtex.svg" alt="">BibTeX</a>
-            </p>
-            <div class="bibtex-box" id="bib_pp2">
-              <button class="bib-copy" onclick="copyBib('bib_pp2')">Copy</button>
-              <pre>@article{yin2026resolving,
-  title   = {Resolving Primitive-Sharing Ambiguity in Long-Tailed Industrial Point Cloud Segmentation via Spatial Context Constraints},
-  author  = {Yin, Chao and Han, Q. and Hou, Z. and Liu, Y. and Dai, A. and Hu, H. and Yang, J. and Yao, W.},
-  journal = {arXiv preprint arXiv:2601.19128},
-  year    = {2026}
-}</pre>
-            </div>
-            <p style="margin: 4px 0; font-size: 13px; color: #555;">
-              Boundary-CB and Density-CB &mdash; two plug-and-play loss modules that resolve geometric ambiguity in long-tailed industrial point cloud segmentation. Achieves 55.74% mIoU on Industrial3D with a 21.7% relative gain on tail classes (reducer: 0% &rarr; 21.12%).
-            </p>
-          </td>
-        </tr>
-      </table>
-
       <!-- ===== END PUBLICATIONS ===== -->
 
       <!-- ===== RESEARCH FUNDING ===== -->
-      <h2>Research Funding</h2>
+      <h2>Research Funding <span class="h3-note">(Selected)</span></h2>
       <ul style="padding-left: 20px;">
         <li class="news-item">
           <strong>Guangdong Province Overseas Postdoctoral Talent Support Program</strong> (PI) &mdash; Jun 2023&ndash;2025.<br>
@@ -795,6 +797,7 @@
       <h2>Academic Service</h2>
       <ul style="padding-left: 20px;">
         <li class="news-item"><strong>Peer Reviewer:</strong> Automation in Construction, ISPRS Journal of Photogrammetry and Remote Sensing, Science of Remote Sensing, Geo-spatial Information Science, Results in Engineering, Remote Sensing</li>
+        <li class="news-item"><strong>Committee Member:</strong> LiDAR Professional Committee, China National Committee for the International Society for Digital Earth (CNISDE). <a href="https://www.cnisde.digitalearth-isde.org/professional-committee/index_58.html" target="_blank">[Details]</a></li>
         <li class="news-item"><strong>Open-Source Contributions:</strong> Active maintainer of 6+ research code repositories with 140+ GitHub stars (<a href="https://github.com/PointCloudYC" target="_blank">github.com/PointCloudYC</a>). All published papers ship publicly available code for reproducibility.</li>
       </ul>
       <!-- ===== END ACADEMIC SERVICE ===== -->
@@ -807,20 +810,22 @@
             <img class="ico" src="static/img/icons/github.svg" alt="GitHub">
             Industrial3D
           </a>
-          <font color="red"><b> [New!]</b></font>
+          <a href="industrial3d/index.html"><img class="ico" src="static/img/icons/blog.svg" alt="">Website</a>
+          <span class="stars" data-gh-repo="PointCloudYC/Industrial3D">&#9733; 11</span>
+          <span class="badge-new">[New!]</span>
           &mdash; The largest terrestrial LiDAR dataset for industrial MEP facilities: <strong>612M labelled points</strong> across 13 water treatment plants (6.6&times; larger than any comparable dataset).
         </li>
         <li class="news-item">
           <a href="https://github.com/PointCloudYC/ResPointNet2" target="_blank">
             <img class="ico" src="static/img/icons/github.svg" alt="GitHub">
             ResPointNet++
-          </a> &mdash; 44 stars. Automated semantic segmentation of industrial point clouds using a deep residual point network. (Automation in Construction, 2021)
+          </a> &mdash; <span class="stars" data-gh-repo="PointCloudYC/ResPointNet2">&#9733; 45</span> stars. Automated semantic segmentation of industrial point clouds using a deep residual point network. (Automation in Construction, 2021)
         </li>
         <li class="news-item">
           <a href="https://github.com/PointCloudYC/Deep-Learning-On-Point-Clouds" target="_blank">
             <img class="ico" src="static/img/icons/github.svg" alt="GitHub">
             Deep-Learning-On-Point-Clouds
-          </a> &mdash; 62 stars. A curated survey and tutorials on deep learning methods for 3D point cloud processing.
+          </a> &mdash; <span class="stars" data-gh-repo="PointCloudYC/Deep-Learning-On-Point-Clouds">&#9733; 62</span> stars. A curated survey and tutorials on deep learning methods for 3D point cloud processing.
         </li>
         <li class="news-item">
           <a href="https://github.com/PointCloudYC/LongTail3D" target="_blank">
@@ -839,11 +844,11 @@
           <a href="https://github.com/PointCloudYC/SQN_tensorflow" target="_blank">
             <img class="ico" src="static/img/icons/github.svg" alt="GitHub">
             SQN-tensorflow
-          </a> (14 stars) &amp;
+          </a> (<span class="stars" data-gh-repo="PointCloudYC/SQN_tensorflow">&#9733; 14</span>) &amp;
           <a href="https://github.com/PointCloudYC/SQN-pytorch" target="_blank">
             <img class="ico" src="static/img/icons/github.svg" alt="GitHub">
             SQN-pytorch
-          </a> (1 star).
+          </a> (<span class="stars" data-gh-repo="PointCloudYC/SQN-pytorch">&#9733; 1</span>).
         </li>
       </ul>
       <!-- ===== END OPEN SOURCE ===== -->
@@ -859,6 +864,12 @@
     </td>
   </tr>
 </table>
+
+<!-- ===== FIGURE LIGHTBOX (click a highlight image to enlarge; Esc or backdrop closes it) ===== -->
+<div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
 
 </body>
 </html>

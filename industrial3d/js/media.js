@@ -52,17 +52,23 @@
     open(img, captionHtml);
   }
 
-  /* Open a looping video (clone of an existing <video> or by src list). */
-  function openVideo(sources, captionHtml) {
+  /* Open a looping video (clone of an existing <video> or by src list).
+     `poster` shows instantly while the full video buffers, so the lightbox
+     never looks like it "hung" on open. */
+  function openVideo(sources, captionHtml, poster) {
     const v = document.createElement('video');
     v.autoplay = true; v.loop = true; v.muted = true;
     v.controls = true; v.playsInline = true;
+    v.preload = 'auto';
+    v.setAttribute('fetchpriority', 'high');
+    if (poster) v.poster = poster;
     sources.forEach(function (s) {
       const src = document.createElement('source');
       src.src = s.src; src.type = s.type;
       v.appendChild(src);
     });
     open(v, captionHtml);
+    v.load();
   }
 
   /* ── Lazy autoplay videos ─────────────────────────────────── */
@@ -111,7 +117,8 @@
           el.querySelectorAll('source').forEach(function (s) {
             srcs.push({ src: s.dataset.src || s.src, type: s.type });
           });
-          openVideo(srcs, cap);
+          const posterVideo = el.querySelector('video[poster]');
+          openVideo(srcs, cap, posterVideo && posterVideo.getAttribute('poster'));
         } else {
           const full = el.getAttribute('data-full');
           const img = el.tagName === 'IMG' ? el : el.querySelector('img');
