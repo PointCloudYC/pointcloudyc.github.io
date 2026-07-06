@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://chaoyin.me/sitemap.xml
+Sitemap: https://pointcloudyc.github.io/sitemap.xml
