@@ -8,8 +8,25 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="js/nav.js" defer></script>
   <script src="js/leaderboard.js" defer></script>
+  <script src="../static/js/site-enhance.js" defer></script>
 </head>
 <body>
+
+<!-- ===== READING PROGRESS BAR ===== -->
+<div id="progress-bar" aria-hidden="true"><div id="progress-fill"></div></div>
+
+<!-- ===== BACK TO TOP ===== -->
+<button class="back-to-top" id="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</button>
+
+<!-- ===== SECTION DOT-RAIL (desktop only) ===== -->
+<nav class="section-rail" id="section-rail" aria-label="Page sections">
+  <a href="#protocol" data-label="Protocol"></a>
+  <a href="#methods" data-label="All Methods"></a>
+  <a href="#per-class-iou" data-label="Per-Class IoU"></a>
+  <a href="#domain-gap" data-label="Domain Gap"></a>
+</nav>
 
 <!-- ── Navigation ─────────────────────────────────────────── -->
 <header class="site-header">
@@ -58,7 +75,7 @@
 </div>
 
 <!-- ── Evaluation Protocol ───────────────────────────────────── -->
-<section class="section--tight">
+<section class="section--tight reveal" id="protocol">
   <div class="container">
     <div class="protocol-grid">
       <div class="protocol-item">
@@ -98,7 +115,7 @@
 <hr class="divider" style="margin:0">
 
 <!-- ── Leaderboard ───────────────────────────────────────────── -->
-<section class="section">
+<section class="section reveal" id="methods">
   <div class="container--wide">
     <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem">
       <div>
@@ -163,7 +180,7 @@
 </section>
 
 <!-- ── Per-class IoU ─────────────────────────────────────────── -->
-<section class="section" style="padding-top:0">
+<section class="section reveal" id="per-class-iou" style="padding-top:0">
   <div class="container--wide" id="perClassSection">
     <span class="section-label">Per-Class Breakdown</span>
     <h2 class="section-title">Per-Class IoU (12 Classes)</h2>
@@ -189,7 +206,7 @@
 </section>
 
 <!-- ── Gap Analysis ───────────────────────────────────────────── -->
-<section class="section" style="padding-top:0">
+<section class="section reveal" id="domain-gap" style="padding-top:0">
   <div class="container">
     <span class="section-label">Key Finding</span>
     <h2 class="section-title">The Domain Transfer Gap</h2>
@@ -213,7 +230,7 @@
 </section>
 
 <!-- ── Call to Action ─────────────────────────────────────────── -->
-<section class="section--tight" style="background:var(--bg-surface);border-top:1px solid var(--border-faint);border-bottom:1px solid var(--border-faint)">
+<section class="section--tight reveal" style="background:var(--bg-surface);border-top:1px solid var(--border-faint);border-bottom:1px solid var(--border-faint)">
   <div class="container" style="text-align:center">
     <h3 style="margin-bottom:0.75rem">Have better results?</h3>
     <p style="color:var(--text-secondary);margin:0 auto 1.5rem;max-width:48ch">

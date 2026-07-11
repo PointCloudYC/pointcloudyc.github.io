@@ -8,8 +8,26 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="js/nav.js" defer></script>
   <script src="js/media.js" defer></script>
+  <script src="../static/js/site-enhance.js" defer></script>
 </head>
 <body>
+
+<!-- ===== READING PROGRESS BAR ===== -->
+<div id="progress-bar" aria-hidden="true"><div id="progress-fill"></div></div>
+
+<!-- ===== BACK TO TOP ===== -->
+<button class="back-to-top" id="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</button>
+
+<!-- ===== SECTION DOT-RAIL (desktop only) ===== -->
+<nav class="section-rail" id="section-rail" aria-label="Page sections">
+  <a href="#taxonomy" data-label="Taxonomy"></a>
+  <a href="#distribution" data-label="Distribution"></a>
+  <a href="#scenes" data-label="Scenes"></a>
+  <a href="#splits" data-label="Splits"></a>
+  <a href="#download" data-label="Download"></a>
+</nav>
 
 <!-- ── Navigation ─────────────────────────────────────────── -->
 <header class="site-header">
@@ -58,7 +76,7 @@
 </div>
 
 <!-- ── Class Taxonomy ────────────────────────────────────────── -->
-<section class="section">
+<section class="section reveal" id="taxonomy">
   <div class="container">
     <span class="section-label">Semantic Classes</span>
     <h2 class="section-title">12-Class MEP Taxonomy</h2>
@@ -196,7 +214,7 @@
 </section>
 
 <!-- ── Statistics ────────────────────────────────────────────── -->
-<section class="section" style="padding-top:0">
+<section class="section reveal" id="distribution" style="padding-top:0">
   <div class="container">
     <span class="section-label">Statistics</span>
     <h2 class="section-title">Distribution &amp; Scale</h2>
@@ -273,7 +291,7 @@
 </section>
 
 <!-- ── Scene Gallery & Videos ─────────────────────────────── -->
-<section class="section" style="padding-top:0" id="scenes">
+<section class="section reveal" style="padding-top:0" id="scenes">
   <div class="container">
     <span class="section-label">Scene Gallery</span>
     <h2 class="section-title">Representative Scenes</h2>
@@ -384,7 +402,7 @@
 </section>
 
 <!-- ── Data Splits ────────────────────────────────────────────── -->
-<section class="section" style="padding-top:0" id="splits">
+<section class="section reveal" style="padding-top:0" id="splits">
   <div class="container">
     <span class="section-label">Data Splits</span>
     <h2 class="section-title">Train / Validation / Test Protocol</h2>
@@ -437,7 +455,7 @@
 </section>
 
 <!-- ── Download ────────────────────────────────────────────── -->
-<section class="section" style="padding-top:0;padding-bottom:5rem" id="download">
+<section class="section reveal" style="padding-top:0;padding-bottom:5rem" id="download">
   <div class="container">
     <span class="section-label">Download</span>
     <h2 class="section-title">Access the Dataset</h2>

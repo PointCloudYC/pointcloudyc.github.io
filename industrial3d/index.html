@@ -13,8 +13,28 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="js/nav.js" defer></script>
   <script src="js/media.js" defer></script>
+  <script src="../static/js/site-enhance.js" defer></script>
 </head>
 <body>
+
+<!-- ===== READING PROGRESS BAR ===== -->
+<div id="progress-bar" aria-hidden="true"><div id="progress-fill"></div></div>
+
+<!-- ===== BACK TO TOP ===== -->
+<button class="back-to-top" id="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</button>
+
+<!-- ===== SECTION DOT-RAIL (desktop only) ===== -->
+<nav class="section-rail" id="section-rail" aria-label="Page sections">
+  <a href="#data-move" data-label="Data in Motion"></a>
+  <a href="#overview" data-label="Overview"></a>
+  <a href="#offer" data-label="What We Offer"></a>
+  <a href="#crisis" data-label="The Dual Crisis"></a>
+  <a href="#results" data-label="Best Results"></a>
+  <a href="#facilities" data-label="Facilities"></a>
+  <a href="#authors" data-label="Authors"></a>
+</nav>
 
 <!-- ── Navigation ─────────────────────────────────────────── -->
 <header class="site-header">
@@ -137,7 +157,7 @@
 </div>
 
 <!-- ── Scene Showcase (live videos) ───────────────────────── -->
-<section class="section" style="padding-bottom:0">
+<section class="section reveal" id="data-move" style="padding-bottom:0">
   <div class="container">
     <span class="section-label">Live Scenes</span>
     <h2 class="section-title">See the Data Move</h2>
@@ -214,7 +234,7 @@
 </section>
 
 <!-- ── Abstract ───────────────────────────────────────────── -->
-<section class="section">
+<section class="section reveal" id="overview">
   <div class="container">
     <span class="section-label">Abstract</span>
     <h2 class="section-title">Overview</h2>
@@ -226,7 +246,7 @@
 </section>
 
 <!-- ── Key Contributions ───────────────────────────────────── -->
-<section class="section" style="padding-top:0">
+<section class="section reveal" id="offer" style="padding-top:0">
   <div class="container">
     <span class="section-label">Contributions</span>
     <h2 class="section-title">What We Offer</h2>
@@ -269,7 +289,7 @@
 </section>
 
 <!-- ── Dual Crisis ─────────────────────────────────────────── -->
-<section class="section" style="padding-top:0">
+<section class="section reveal" id="crisis" style="padding-top:0">
   <div class="container">
     <span class="section-label">Core Challenge</span>
     <h2 class="section-title">The Dual Crisis</h2>
@@ -296,7 +316,7 @@
 </section>
 
 <!-- ── Benchmark Snapshot ──────────────────────────────────── -->
-<section class="section" style="padding-top:0">
+<section class="section reveal" id="results" style="padding-top:0">
   <div class="container">
     <span class="section-label">Benchmark</span>
     <h2 class="section-title">Best Results Per Paradigm</h2>
@@ -350,7 +370,7 @@
 </section>
 
 <!-- ── Facility Overview ────────────────────────────────────── -->
-<section class="section" style="padding-top:0">
+<section class="section reveal" id="facilities" style="padding-top:0">
   <div class="container">
     <span class="section-label">The Dataset</span>
     <h2 class="section-title">7 Water Treatment Facilities</h2>
@@ -381,7 +401,7 @@
 </section>
 
 <!-- ── Authors ─────────────────────────────────────────────── -->
-<section class="section" style="background:var(--bg-surface);border-top:1px solid var(--border-faint);border-bottom:1px solid var(--border-faint);padding-top:3rem;padding-bottom:3rem">
+<section class="section reveal" id="authors" style="background:var(--bg-surface);border-top:1px solid var(--border-faint);border-bottom:1px solid var(--border-faint);padding-top:3rem;padding-bottom:3rem">
   <div class="container">
     <span class="section-label">Research Team</span>
     <h2 class="section-title">Authors</h2>

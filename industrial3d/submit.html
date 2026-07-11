@@ -7,8 +7,25 @@
   <meta name="description" content="Submit your benchmark results to the Industrial3D leaderboard. GitHub PR-based submission, evaluation protocol details, and citation information.">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/nav.js" defer></script>
+  <script src="../static/js/site-enhance.js" defer></script>
 </head>
 <body>
+
+<!-- ===== READING PROGRESS BAR ===== -->
+<div id="progress-bar" aria-hidden="true"><div id="progress-fill"></div></div>
+
+<!-- ===== BACK TO TOP ===== -->
+<button class="back-to-top" id="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</button>
+
+<!-- ===== SECTION DOT-RAIL (desktop only) ===== -->
+<nav class="section-rail" id="section-rail" aria-label="Page sections">
+  <a href="#how-to-submit" data-label="How to Submit"></a>
+  <a href="#schema" data-label="JSON Schema"></a>
+  <a href="#protocol-details" data-label="Protocol"></a>
+  <a href="#cite" data-label="Cite"></a>
+</nav>
 
 <!-- ── Navigation ─────────────────────────────────────────── -->
 <header class="site-header">
@@ -57,7 +74,7 @@
 </div>
 
 <!-- ── How to Submit ──────────────────────────────────────────── -->
-<section class="section">
+<section class="section reveal" id="how-to-submit">
   <div class="container">
     <div class="grid-2" style="gap:3rem;align-items:start">
 
@@ -164,7 +181,7 @@
 </section>
 
 <!-- ── JSON Schema ────────────────────────────────────────────── -->
-<section class="section" style="padding-top:0">
+<section class="section reveal" id="schema" style="padding-top:0">
   <div class="container">
     <span class="section-label">Format</span>
     <h2 class="section-title">Required JSON Entry Schema</h2>
@@ -216,7 +233,7 @@
 </section>
 
 <!-- ── Evaluation Protocol ───────────────────────────────────── -->
-<section class="section" style="padding-top:0">
+<section class="section reveal" id="protocol-details" style="padding-top:0">
   <div class="container">
     <span class="section-label">Protocol</span>
     <h2 class="section-title">Evaluation Protocol Details</h2>
@@ -253,7 +270,7 @@
 </section>
 
 <!-- ── Citation ───────────────────────────────────────────────── -->
-<section class="section" style="padding-top:0" id="cite">
+<section class="section reveal" style="padding-top:0" id="cite">
   <div class="container">
     <span class="section-label">Citation</span>
     <h2 class="section-title">Cite Industrial3D</h2>

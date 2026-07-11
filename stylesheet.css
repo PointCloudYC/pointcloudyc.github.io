@@ -133,6 +133,7 @@ h2 {
   border: none;
   margin: 42px 0 20px;
   padding-bottom: 11px;
+  scroll-margin-top: 20px;
 }
 
 /* Friendly line-icon shown before each section heading */
@@ -787,6 +788,184 @@ img {
   body {
     padding: 0 14px;
   }
+}
+
+/* ===== Reading progress bar ===== */
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 200;
+  pointer-events: none;
+  background: transparent;
+}
+
+#progress-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to right, var(--accent), var(--ember));
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #progress-fill {
+    transition: transform 0.12s linear;
+  }
+}
+
+/* ===== Back to top ===== */
+.back-to-top {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px -8px rgba(28, 29, 33, 0.35);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.15s ease, color 0.15s ease;
+  z-index: 90;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.back-to-top:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.back-to-top svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ===== Section dot-rail (desktop scrollspy) ===== */
+.section-rail {
+  position: fixed;
+  right: 26px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  z-index: 80;
+}
+
+.section-rail a {
+  position: relative;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--line-strong);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.section-rail a:hover,
+.section-rail a:focus-visible {
+  background: var(--ink-faint);
+  transform: scale(1.25);
+}
+
+.section-rail a.active {
+  background: var(--accent);
+  transform: scale(1.3);
+}
+
+.section-rail a::after {
+  content: attr(data-label);
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--ink);
+  color: #fff;
+  padding: 4px 9px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.section-rail a:hover::after,
+.section-rail a:focus-visible::after {
+  opacity: 1;
+}
+
+@media screen and (max-width: 1100px) {
+  .section-rail {
+    display: none;
+  }
+}
+
+/* ===== Scroll-reveal (sections + publication cards) — skipped entirely under reduced motion ===== */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* pub-row already has its own hover transform; don't fight it before reveal */
+  .pub-row.reveal:hover {
+    transform: translateY(-2px);
+  }
+  .pub-row.reveal.is-visible:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* Anchors and buttons that live inside a link bar (BibTeX toggle, WeChat) —
+   reset native button chrome so they read identically to the surrounding <a> tags */
+.pub-links button,
+.links button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: var(--accent);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.pub-links button:hover,
+.links button:hover {
+  color: var(--ember);
+}
+
+.links .wechat.show-tip::after {
+  opacity: 1;
 }
 
 /* Phones and small tablets: stack the header and paper rows */
