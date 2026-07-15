@@ -41,6 +41,7 @@
   }
   </script>
   <script src="static/js/site-enhance.js" defer></script>
+  <script src="static/js/pcip-effects.js" defer></script>
 </head>
 <body>
 
@@ -214,6 +215,17 @@
         </tr>
       </table>
       <!-- ===== END HEADER ===== -->
+
+      <!-- ===== PCIP IDENTITY EFFECTS (progressively enhanced; hidden until JS runs) ===== -->
+      <div class="pcip-band" id="scan-bim-band" aria-hidden="true" hidden>
+        <canvas class="pcip-canvas" id="scan-bim-canvas"></canvas>
+        <p class="pcip-caption">Scan&nbsp;&rarr;&nbsp;Segment&nbsp;&rarr;&nbsp;BIM &mdash; the point-cloud-to-model pipeline at the core of my research.</p>
+      </div>
+      <div class="pcip-band" id="live-viewer-band" aria-hidden="true" hidden>
+        <canvas class="pcip-canvas" id="live-viewer-canvas"></canvas>
+        <p class="pcip-caption">Drag to orbit &mdash; <span class="pcip-hint">placeholder MEP scene; swap in an Industrial3D sample for real data.</span></p>
+      </div>
+      <!-- ===== END PCIP IDENTITY EFFECTS ===== -->
 
       <!-- ===== NEWS ===== -->
       <h2 id="news"><svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10.3 19a1.9 1.9 0 0 0 3.4 0"/></svg>News</h2>
