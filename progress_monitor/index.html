@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><title>LOOP — Progress Dashboard</title>
+<style>
+:root{--ink:#1c2733;--muted:#5b6b7a;--line:#d6dde4;
+--behind:#c62828;--ahead:#2a8a3e;--flat:#5b6b7a}
+*{box-sizing:border-box}
+body{font-family:system-ui,Segoe UI,Arial,sans-serif;margin:0;
+background:#eef1f4;color:var(--ink)}
+.wrap{max-width:1180px;margin:0 auto;padding:20px}
+h1{font-size:22px;margin:0 0 2px}
+.sub{color:var(--muted);font-size:13px;margin-bottom:16px}
+.top{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:16px}
+.status-img{background:#fff;border:1px solid var(--line);
+border-radius:8px;overflow:hidden}
+.status-img .cap{font-weight:600;font-size:13px;padding:8px 10px;
+border-bottom:1px solid var(--line)}
+.status-img img{width:100%;height:180px;object-fit:cover;display:block}
+.img-placeholder{height:180px;display:flex;flex-direction:column;
+align-items:center;justify-content:center;color:var(--muted);
+background:repeating-linear-gradient(45deg,#f5f7f9,#f5f7f9 10px,
+#eef1f4 10px,#eef1f4 20px)}
+.overall{background:#fff;border:1px solid var(--line);
+border-radius:8px;padding:14px}
+.overall h2{font-size:14px;margin:0 0 10px;text-transform:uppercase;
+letter-spacing:.04em;color:var(--muted)}
+.big{font-size:30px;font-weight:700;line-height:1}
+.big.behind{color:var(--behind)} .big.ahead{color:var(--ahead)}
+.big.flat{color:var(--flat)}
+.bar-row{display:flex;align-items:center;gap:8px;margin:6px 0}
+.bar-lbl{width:58px;font-size:12px;color:var(--muted)}
+.bar-val{width:42px;text-align:right;font-size:12px;
+font-variant-numeric:tabular-nums}
+.track{flex:1;height:12px;background:#eef1f4;border-radius:6px;overflow:hidden}
+.bar{height:100%;border-radius:6px}
+.bar.actual{background:#1565c0} .bar.planned{background:#9aa7b4}
+.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:8px;
+padding:12px;display:flex;flex-direction:column;gap:8px}
+.card-head{display:flex;align-items:center;
+justify-content:space-between;gap:6px}
+.card-title{font-weight:600;font-size:14px}
+.metric{font-size:12px;color:var(--muted)}
+.metric.deviation{font-weight:600;font-size:13px}
+.deviation.behind{color:var(--behind)} .deviation.ahead{color:var(--ahead)}
+.deviation.flat{color:var(--flat)}
+.drill{display:flex;flex-wrap:wrap;gap:4px;margin-top:auto;
+padding-top:6px;border-top:1px dashed var(--line)}
+.dd{font-size:11px;text-decoration:none;color:#1565c0;
+border:1px solid #cfe0f3;border-radius:4px;padding:2px 6px}
+.dd.disabled{color:#9aa7b4;border-color:var(--line);pointer-events:none}
+.ev{font-size:10px;border-radius:10px;padding:2px 7px;white-space:nowrap}
+.ev-measured{background:#e3f3e8;color:#1d6b32}
+.ev-measured_partial{background:#fbf0d6;color:#8a6500}
+.ev-simulated{background:#e3eefb;color:#1457a8}
+.ev-placeholder{background:#eef1f4;color:#5b6b7a}
+.banner{background:#fbf0d6;color:#7a5a00;border:1px solid #e8d9a8;
+border-radius:6px;padding:8px 12px;font-size:12px;margin-bottom:16px}
+.card.card-critical{border-left:4px solid var(--behind);
+box-shadow:0 0 0 1px var(--behind) inset}
+.crit{font-size:10px;border-radius:10px;padding:2px 7px;white-space:nowrap;
+background:#fdecec;color:var(--behind);font-weight:600}
+</style></head><body>
+<div class="wrap">
+<h1>LOOP — Progress Dashboard</h1>
+<div class="sub">Western Cross Boundary Bridge &middot; as of 2026-06-24 &middot; PC-vs-BIM (DeltaBIM) + programme rollup</div>
+<div class="banner">Schedule deviation uses real programme dates; planned dates from the AECOM programme (as of 2026-06-10); module evidence is <b>measured (partial)</b>. Critical-path highlight pending AECOM activity dependencies (programme has dates but no predecessor column). Figures are progress evidence, not a contractual claim.</div>
+<div class="top"><div class="status-img"><div class="cap">Planned Status</div><div class="img-placeholder">Planned Status<br><small>image pending</small></div></div><div class="status-img"><div class="cap">Actual Status</div><div class="img-placeholder">Actual Status<br><small>image pending</small></div></div><div class="overall"><h2>Overall Progress</h2><div class="bar-row"><span class="bar-lbl">Planned</span><div class="track"><div class="bar planned" style="width:32.8%"></div></div><span class="bar-val">33%</span></div><div class="bar-row"><span class="bar-lbl">Actual</span><div class="track"><div class="bar actual" style="width:6.6%"></div></div><span class="bar-val">7%</span></div><div style="margin-top:10px">Deviation <span class="big behind">-26%</span></div><div class="big behind" style="font-size:18px;margin-top:4px">47 days behind</div><div class="metric" style="margin-top:6px">AECOM reported 23% &middot; scan vs reported -16 pp</div><div class="metric" style="margin-top:4px">Evidence: <span class="ev ev-measured_partial">measured (partial)</span></div></div></div>
+<div class="cards"><div class="card"><div class="card-head"><span class="card-title">CIQ Building</span><span class="ev ev-placeholder">no data yet</span></div><div class="bars"><div class="bar-row"><span class="bar-lbl">Actual</span><div class="track"><div class="bar actual" style="width:0.0%"></div></div><span class="bar-val">&mdash;</span></div><div class="bar-row"><span class="bar-lbl">Planned</span><div class="track"><div class="bar planned" style="width:0.0%"></div></div><span class="bar-val">&mdash;</span></div></div><div class="metric deviation flat">Deviation: &mdash;</div><div class="metric">Programme: &mdash; &middot; Adjusted to complete: &mdash;</div><div class="metric">AECOM reported: &mdash; &middot; scan vs reported: &mdash;</div><div class="drill"><a class="dd disabled" href="#">Timelapse</a><a class="dd" href="run_d1/20260628_100200.json">PC-vs-PC</a><a class="dd" href="20260628_122238.html">PC-vs-BIM</a><a class="dd disabled" href="#">Gantt</a></div></div><div class="card"><div class="card-head"><span class="card-title">Main Bridge</span><span class="ev ev-placeholder">no data yet</span></div><div class="bars"><div class="bar-row"><span class="bar-lbl">Actual</span><div class="track"><div class="bar actual" style="width:0.0%"></div></div><span class="bar-val">&mdash;</span></div><div class="bar-row"><span class="bar-lbl">Planned</span><div class="track"><div class="bar planned" style="width:25.7%"></div></div><span class="bar-val">26%</span></div></div><div class="metric deviation flat">Deviation: &mdash;</div><div class="metric">Programme: 26% &middot; Adjusted to complete: &mdash;</div><div class="metric">AECOM reported: 14% &middot; scan vs reported: &mdash;</div><div class="drill"><a class="dd disabled" href="#">Timelapse</a><a class="dd" href="run_d1/20260628_100200.json">PC-vs-PC</a><a class="dd" href="20260628_122238.html">PC-vs-BIM</a><a class="dd disabled" href="#">Gantt</a></div></div><div class="card"><div class="card-head"><span class="card-title">Footbridge</span><span class="ev ev-measured_partial">measured (partial)</span></div><div class="bars"><div class="bar-row"><span class="bar-lbl">Actual</span><div class="track"><div class="bar actual" style="width:6.4%"></div></div><span class="bar-val">6%</span></div><div class="bar-row"><span class="bar-lbl">Planned</span><div class="track"><div class="bar planned" style="width:32.7%"></div></div><span class="bar-val">33%</span></div></div><div class="metric deviation behind">Deviation: 47 days behind</div><div class="metric">Programme: 33% &middot; Adjusted to complete: 205 days</div><div class="metric">AECOM reported: 23% &middot; scan vs reported: -16 pp</div><div class="drill"><a class="dd disabled" href="#">Timelapse</a><a class="dd" href="run_d1/20260628_100200.json">PC-vs-PC</a><a class="dd" href="20260628_122238.html">PC-vs-BIM</a><a class="dd disabled" href="#">Gantt</a></div></div><div class="card"><div class="card-head"><span class="card-title">Vehicular Bridge</span><span class="ev ev-measured_partial">measured (partial)</span></div><div class="bars"><div class="bar-row"><span class="bar-lbl">Actual</span><div class="track"><div class="bar actual" style="width:28.6%"></div></div><span class="bar-val">29%</span></div><div class="bar-row"><span class="bar-lbl">Planned</span><div class="track"><div class="bar planned" style="width:41.6%"></div></div><span class="bar-val">42%</span></div></div><div class="metric deviation behind">Deviation: 21 days behind</div><div class="metric">Programme: 42% &middot; Adjusted to complete: 211 days</div><div class="metric">AECOM reported: 35% &middot; scan vs reported: -6 pp</div><div class="drill"><a class="dd disabled" href="#">Timelapse</a><a class="dd" href="run_d1/20260628_100200.json">PC-vs-PC</a><a class="dd" href="20260628_122238.html">PC-vs-BIM</a><a class="dd disabled" href="#">Gantt</a></div></div><div class="card"><div class="card-head"><span class="card-title">External Works</span><span class="ev ev-placeholder">no data yet</span></div><div class="bars"><div class="bar-row"><span class="bar-lbl">Actual</span><div class="track"><div class="bar actual" style="width:0.0%"></div></div><span class="bar-val">&mdash;</span></div><div class="bar-row"><span class="bar-lbl">Planned</span><div class="track"><div class="bar planned" style="width:0.0%"></div></div><span class="bar-val">&mdash;</span></div></div><div class="metric deviation flat">Deviation: &mdash;</div><div class="metric">Programme: &mdash; &middot; Adjusted to complete: &mdash;</div><div class="metric">AECOM reported: &mdash; &middot; scan vs reported: &mdash;</div><div class="drill"><a class="dd disabled" href="#">Timelapse</a><a class="dd" href="run_d1/20260628_100200.json">PC-vs-PC</a><a class="dd" href="20260628_122238.html">PC-vs-BIM</a><a class="dd disabled" href="#">Gantt</a></div></div></div>
+</div></body></html>
